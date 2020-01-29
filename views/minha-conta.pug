@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 Perfil de #{user.usuario}:
+    ul
+        li
+            strong ID: #{user.id}
+        li
+            strong E-mail: #{user.email}
+        li
+            strong Admin: #{user.isAdmin}
+        li
+            strong Hashed password: #{user.senha}
+        li
+            strong Last update: #{user.updatedAt}

@@ -1,0 +1,5 @@
+node_modules
+seeders
+.env
+/.vscode
+teste.js

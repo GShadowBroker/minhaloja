@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    
+    .container
+        .row.cadastro-form
+            .col-md-3
+            .col-md-6
+                h3 Cadastrar em nossa loja é rápido e simples!
+                small(class="text-muted") Se você já tem uma conta, faça o seu login 
+                    a(href="/autenticacao/login") aqui.
+                hr
+                form(action="/autenticacao/cadastrar" method="post")
+                    .form-group
+                        label(for="usuario") Nome de usuário
+                        input(class="form-control" name="usuario" id="usuario" type="text" minlength="2" maxlength="55" required)
+                        small(class="form-text text-muted") Este é o seu nome de usuário na loja
+                    .form-group
+                        label(for="email") E-mail
+                        input(class="form-control" name="email" id="email" type="email" minlength="4" required)
+                        small(class="form-text text-muted") Nunca compartilharemos o seu e-mail com ninguém
+                    .form-group
+                        label(for="senha") Senha
+                        input(class="form-control" name="senha" id="senha" type="password" minlength="6" maxlength="26" required)
+                        small(class="form-text text-muted") A sua senha deve possuir de 6 a 26 caractéres e deve conter letras e números
+                    .form-group
+                        label(for="confirmarSenha") Confirmar Senha
+                        input(class="form-control" name="confirmarSenha" id="confirmarSenha" type="password" minlength="6" maxlength="26" required)
+                        small(class="form-text text-muted") Insira novamente a sua senha
+                    .form-group.form-check
+                        input(type="checkbox" name="concordo" class="form-check-input" id="concordo" @click="toggleRegisterButton")
+                        label(for="concordo" class="form-check-label") Li e concordo com os 
+                            a(href="#") Termos de Uso.
+                    .form-group
+                        input(type="submit" class="btn btn-primary btn-block" value="Cadastrar")
+            .col-md-3

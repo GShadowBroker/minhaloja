@@ -1,0 +1,112 @@
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #ecf0f1;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+.header {
+    background-color: #ecf0f1;
+
+    .menu-conta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        ul {
+            margin: 0;
+            li {
+                display: inline;
+                padding: 0px 10px 0px 10px;
+            }
+        }
+    }
+}
+
+.navegacao {
+    display: block;
+    width: 100%;
+
+    position: sticky;
+    top:0;
+    z-index: 100;
+    background-color: #e74c3c;
+    padding: 15px;
+    .container {
+        .col-md-4 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                li {
+                    display: inline;
+                    a {
+                        padding: 15px 5px 15px 5px;
+                        color: white;
+                        text-decoration-line: none;
+                        border-radius: 5px;
+                        transition: 200ms;
+                        &:hover {
+                            background-color: #c0392b;
+                        }
+                    }
+                }
+            }
+        }
+        .carrinho img {
+            padding: 5px;
+            border-radius: 5px;
+            transition: 200ms;
+            &:hover {
+                background-color: #c0392b;
+            }
+        }
+    }
+    
+}
+
+.content {
+    padding-top: 50px;
+    padding-bottom: 260px; //height of the footer
+    .products {
+        margin-top: 40px;
+        background-color: #ecf0f1;
+        .product {
+            background-color: white;
+            min-height: 300px;
+            max-width: 300px;
+            margin: 0px 10px 0px 10px;
+        }
+    }
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 200px; //height of the footer
+    width: 100%;
+    background-color: #e74c3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    padding: 40px;
+}

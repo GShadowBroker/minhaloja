@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    
+    .container
+        .row.cadastro-form
+            .col-md-4
+            .col-md-4
+                h3 Faça o seu login
+                small(class="text-muted") Ainda não tem uma conta? Faça já o seu cadastro 
+                    a(href="/autenticacao/cadastrar") aqui.
+                hr
+                if error
+                    ul
+                        each error in errors
+                            li(class="text-danger")= error.message
+                form(action="" method="post")
+                    .form-group
+                        label(for="usuario") Nome de usuário
+                        input(class="form-control" name="username" id="usuario" type="text")
+
+                    .form-group
+                        label(for="senha") Senha
+                        input(class="form-control" name="password" id="senha" type="password")
+                        small(class="form-text text-muted")
+                            a(href="#") Esqueci minha senha
+                    .form-group
+                        input(type="submit" class="btn btn-primary btn-block" value="Entrar")
+            .col-md-4
