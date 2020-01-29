@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
 	if (!req.user){
         return res.render('index', {name: null});
     }
-    return res.render('index', {name: req.user.username});
+    return res.render('index', {name: req.user.usuario});
 });
 
 module.exports = router;

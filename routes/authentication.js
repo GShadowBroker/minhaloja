@@ -61,10 +61,10 @@ router.post('/cadastrar', [
 });
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', {message: req.flash('error')});
 });
 
-router.post('/login', passport.authenticate('local', {
+router.post('/login', passport.authenticate('local-signin', {
     successRedirect: '/',
     failureRedirect: '/autenticacao/login',
     failureFlash: true

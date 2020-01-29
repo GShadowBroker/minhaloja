@@ -10,10 +10,8 @@ block content
                 small(class="text-muted") Ainda não tem uma conta? Faça já o seu cadastro 
                     a(href="/autenticacao/cadastrar") aqui.
                 hr
-                if error
-                    ul
-                        each error in errors
-                            li(class="text-danger")= error.message
+                .error
+                    p(class="text-danger") #{message}
                 form(action="" method="post")
                     .form-group
                         label(for="usuario") Nome de usuário

@@ -27,6 +27,11 @@ module.exports = {
         allowNull: false,
         defaultValue: false
       },
+      ultimo_login: {
+        type: Sequelize.DATE,
+        defaultValue: null,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
