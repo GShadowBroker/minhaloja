@@ -13,6 +13,12 @@ body {
     box-sizing: border-box;
 }
 
+.disabled {
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+
 .wrapper {
     min-height: 100%;
     position: relative;

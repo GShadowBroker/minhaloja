@@ -15,13 +15,14 @@ block content
                 form(action="" method="post")
                     .form-group
                         label(for="usuario") Nome de usuário
-                        input(class="form-control" name="username" id="usuario" type="text")
+                        input(class="form-control" name="username" id="usuario" type="text" minlength="2" maxlength="55" required)
 
                     .form-group
                         label(for="senha") Senha
-                        input(class="form-control" name="password" id="senha" type="password")
+                        input(class="form-control" name="password" id="senha" type="password" minlength="6" maxlength="26" required)
                         small(class="form-text text-muted")
                             a(href="#") Esqueci minha senha
+
                     .form-group
                         input(type="submit" class="btn btn-primary btn-block" value="Entrar")
             .col-md-4

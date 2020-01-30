@@ -10,7 +10,16 @@ block content
                 small(class="text-muted") Se você já tem uma conta, faça o seu login 
                     a(href="/autenticacao/login") aqui.
                 hr
-                form(action="/autenticacao/cadastrar" method="post")
+                form(action="/autenticacao/cadastrar" class="register-form" method="post" @submit.prevent="handleSubmitRegister")
+                    .errors-register
+                        if errors
+                            h4 Por favor, corrija os seguintes erros:
+                            ul(class="list-group")
+                                each error in errors
+                                    li(class="list-group-item list-group-item-danger")= error.msg
+                        ul(v-if="errors.length > 0" class="list-group")
+                            li(class="list-group-item list-group-item-danger" v-for="error in errors") {{error.message}}
+
                     .form-group
                         label(for="usuario") Nome de usuário
                         input(class="form-control" name="usuario" id="usuario" type="text" minlength="2" maxlength="55" required)
@@ -32,5 +41,8 @@ block content
                         label(for="concordo" class="form-check-label") Li e concordo com os 
                             a(href="#") Termos de Uso.
                     .form-group
-                        input(type="submit" class="btn btn-primary btn-block" value="Cadastrar")
+                        input(type="submit" class="btn btn-primary btn-block submit-btn" :class="submitDisabled" value="Cadastrar" disabled)
             .col-md-3
+
+block javascript
+    script(src="/javascripts/cadastro.js")

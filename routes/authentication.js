@@ -1,6 +1,8 @@
 'use strict';
 
 const users = require('../models').users;
+const checkAuthenticated = require('./login_redirects/checkAuthenticated');
+const checkNotAuthenticated = require('./login_redirects/checkNotAuthenticated');
 const express = require('express');
 const passport = require('passport');
 const initialize = require('passport-local');
@@ -9,12 +11,12 @@ const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
-router.get('/cadastrar', (req, res) => {
-    res.render('cadastro');
+router.get('/cadastrar', checkNotAuthenticated, (req, res) => {
+    res.render('cadastro', {user:req.user});
 });
 
 router.post('/cadastrar', [
-    check('usuario','O nome de usuário deve conter somente letras e números.').isAlphanumeric(['pt-BR']),
+    check('usuario','O nome de usuário deve conter somente letras e números, sem espaços.').isAlphanumeric(['pt-BR']),
     check('usuario','O nome de usuário deve conter entre 2 e 55 caractéres.').isLength({min:2,max:55}),
     check('usuario','O nome de usuário deve ser informado.').not().isEmpty(),
     check('usuario').trim().escape(),
@@ -60,14 +62,19 @@ router.post('/cadastrar', [
     });
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('login', {message: req.flash('error')});
 });
 
-router.post('/login', passport.authenticate('local-signin', {
+router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/autenticacao/login',
     failureFlash: true
 }));
+
+router.get('/logout', checkAuthenticated, (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
 
 module.exports = router;

@@ -12,22 +12,25 @@ html(lang="pt-BR")
 		link(rel='stylesheet' href='/stylesheets/style.css')
 		title Loja
 	body
-		.wrapper
+		.wrapper#root
 			.header
 				.container
 					.row
 						.col-md-6.loja-title
 							h1 Minha Loja
 						.col-md-6.menu-conta
-							if name
+							if user
 								ul.menu-conta
-									li Ol&aacute;, #{name}!
+									li Ol&aacute;, #{user.usuario}!
+									if user.isAdmin
+										li
+											a(href='/painel-de-controle') Painel de controle
 									li
 										a(href='/minhaconta') Minha conta
 									li
 										a(href='#') Ajuda
 									li
-										a(href='#') Sair
+										a(href='/autenticacao/logout') Sair
 							else
 								ul.menu-conta
 									li
@@ -60,7 +63,12 @@ html(lang="pt-BR")
 						.col-md-4.carrinho
 							a(href="#")
 								img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=40)
-			.content
+			.content#content
 				block content
 			footer
 				| &copy;2020 - Minha Loja
+	
+		script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+		script(src="/javascripts/script.js")
+		block javascript
+			
