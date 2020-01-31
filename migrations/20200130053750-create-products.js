@@ -3,10 +3,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('products', {
       id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        primaryKey: true
       },
       image_path: {
         type: Sequelize.STRING,
@@ -15,7 +15,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      price: {
+      price_cents: {
         type: Sequelize.INTEGER
       },
       os: {

@@ -18,6 +18,12 @@ body {
 .wrapper {
   min-height: 100%;
   position: relative; }
+  .wrapper .alert {
+    position: absolute;
+    bottom: 0;
+    height: fit-content;
+    width: fit-content;
+    padding: 40px; }
 
 .header {
   background-color: #ecf0f1; }

@@ -22,6 +22,14 @@ body {
 .wrapper {
     min-height: 100%;
     position: relative;
+
+    .alert {
+        position: absolute;
+        bottom:0;
+        height: fit-content;
+        width: fit-content;
+        padding: 40px;
+    }
 }
 
 .header {

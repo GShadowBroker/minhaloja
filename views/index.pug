@@ -2,8 +2,17 @@ extends layout
 
 block content
   .container
+      
       .row.products
-        .col-md.product.card
+        if products
+          .col-md.product.card
+            img(src=products[0].image_path class="card-img-top" alt="...")
+            .card-body
+              h5.card-title= products[0].name
+              p.card-text Por Apenas R$ #{products[0].price}
+              a(href="#" class="btn btn-success btn-block") Adicionar
+        else
+          .col-md.product.card
           img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
           .card-body
             h5.card-title Product Name

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.VIRTUAL(DataTypes.DECIMAL(10,2), ['price_cents']),
       get: function(){
-        return this.get('price_cents') / 100;
+        return (this.get('price_cents') / 100).toFixed(2);
       }
     },
     os: DataTypes.STRING,

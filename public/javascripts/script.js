@@ -2,12 +2,23 @@
 
 let app = new Vue({
     el: '#root',
-    mounted(){
-    },
+
+    mounted() {
+        window.onload = function () {
+            let alertBox = document.querySelector('.alert');
+            if (alertBox) {
+                setTimeout(function () {
+                    alertBox.remove();
+                }, 5000);
+            }
+        }
+    }, 
+
     data: {
         errors: [],
         submitDisabled: 'disabled',
     },
+
     methods: {
         handleSubmitRegister: function() {
             if (this.submitDisabled == "disabled"){

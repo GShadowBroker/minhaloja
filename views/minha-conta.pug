@@ -1,17 +1,22 @@
 extends layout
 
 block content
-    h1 Perfil de #{user.usuario}:
-    ul
-        li
-            strong ID: #{user.id}
-        li
-            strong E-mail: #{user.email}
-        li
-            strong Administrador: #{user.isAdmin}
-        li
-            strong Senha encriptada: #{user.senha}
-        li
-            strong Último login: #{user.ultimo_login}
-        li
-            strong Última modificação: #{user.updatedAt}
+    .container
+        .row
+            .col-2
+            .col-8
+                h1 Perfil de #{user.usuario}:
+                ul.list-group
+                    li.list-group-item
+                        span ID: #{user.id}
+                    li.list-group-item
+                        span E-mail: #{user.email}
+                    li.list-group-item
+                        span Administrador: #{user.isAdmin}
+                    li.list-group-item
+                        span Senha encriptada: #{user.senha}
+                    li.list-group-item
+                        span Último login: #{user.ultimo_login}
+                    li.list-group-item
+                        span Última modificação: #{user.updatedAt}
+            .col-2
