@@ -11,8 +11,10 @@ block content
                     a(href="/autenticacao/cadastrar") aqui.
                 hr
                 .error
-                    p(class="text-danger") #{message}
+                    if message.length > 0
+                        p(class="list-group-item list-group-item-danger") #{message}
                 form(action="" method="post")
+                    input(type="hidden" name="_csrf" value=csrfToken)
                     .form-group
                         label(for="usuario") Nome de usuário
                         input(class="form-control" name="username" id="usuario" type="text" minlength="2" maxlength="55" required)
@@ -22,7 +24,6 @@ block content
                         input(class="form-control" name="password" id="senha" type="password" minlength="6" maxlength="26" required)
                         small(class="form-text text-muted")
                             a(href="#") Esqueci minha senha
-
                     .form-group
                         input(type="submit" class="btn btn-primary btn-block" value="Entrar")
             .col-md-4

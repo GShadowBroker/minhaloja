@@ -18,7 +18,19 @@ module.exports = function init(passport) {
                         console.log('incorrect password');
                         return done(null, false, {message:'Senha incorreta!'});
                     }
-                    return done(null, user);
+                    users.update({
+                        ultimo_login: new Date()
+                        },
+                        {
+                            where: {
+                                usuario: user.usuario  
+                            }
+                        }
+                    )
+                        .then(() => {
+                            return done(null, user);
+                        })
+                        .catch(err => console.log(err));
                 })
                 .catch(err => done(err));
         }

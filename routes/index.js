@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
             return res.render('index', {user: req.user, products});
         })
         .catch(err => console.log(err));
-	
 });
 
 module.exports = router;

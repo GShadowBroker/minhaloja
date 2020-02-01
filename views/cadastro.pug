@@ -11,6 +11,7 @@ block content
                     a(href="/autenticacao/login") aqui.
                 hr
                 form(action="/autenticacao/cadastrar" class="register-form" method="post" @submit.prevent="handleSubmitRegister")
+                    input(type="hidden" name="_csrf" value=csrfToken)
                     .errors-register
                         if errors
                             h4 Por favor, corrija os seguintes erros:

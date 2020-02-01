@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
+        isEmail: {
+          msg: 'O e-mail informado é inválido.'
+        }
       }
     },
     senha: {
@@ -36,6 +38,51 @@ module.exports = (sequelize, DataTypes) => {
     ultimo_login: {
       type: DataTypes.DATE,
       defaultValue: null
+    },
+    nome_completo: {
+      type: DataTypes.STRING
+    },
+    cpf: {
+      type: DataTypes.STRING,
+      validate: {
+        isNumeric: {
+          msg:'O CPF informado deve conter apenas números sem pontuações ou traços.'
+        }
+      }
+    },
+    cep: {
+      type: DataTypes.STRING,
+      validate: {
+        isNumeric: {
+          msg:'O CEP deve conter apenas números sem puntuações ou traços.'
+        }
+      }
+    },
+    logradouro: {
+      type: DataTypes.STRING
+    },
+    complemento: {
+      type: DataTypes.STRING
+    },
+    bairro: {
+      type: DataTypes.STRING
+    },
+    localidade: {
+      type: DataTypes.STRING
+    },
+    uf: {
+      type: DataTypes.STRING
+    },
+    unidade: {
+      type: DataTypes.STRING
+    },
+    cartao: {
+      type: DataTypes.STRING,
+      validade: {
+        isCreditCard: {
+          msg: 'O cartão informado é inválido.'
+        }
+      }
     }
   }, {});
   users.associate = function(models) {

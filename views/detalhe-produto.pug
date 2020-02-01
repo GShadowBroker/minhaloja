@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    .container
+        .row.product-details.text-right
+            .col-1
+            .col-4.product-image
+                img(src=product.image_path, alt="", width="100%")
+            .col-6.product-card
+                h1= product.name
+                span.text-muted (Cód. #{product.id})
+                hr
+                p De: R$ 
+                    strike #{(Math.round((product.price / 0.8) * 100) / 100).toFixed(2)} 
+                    span.text-success (20% de desconto) 
+                |Por Apenas:
+                h2: strong R$ #{product.price}
+                hr
+                .row
+                    .col-6
+                        form(action="" method="post")
+                            input(class="btn btn-success btn-block" type="submit" value="+ lista de desejos")
+                    .col-6
+                        form(action="" method="post")
+                            input(class="btn btn-success btn-block" type="submit" value="+ carrinho")
+            .col-1
+        .row.product-details
+            h4.description Descrição do produto:
+            .col-12
+                ul.list-group
+                    li.list-group-item 
+                        strong Modelo: 
+                        span= product.name
+                    li.list-group-item 
+                        strong Fabricante: 
+                        span= product.manufacturer.name
+                    li.list-group-item 
+                        strong Sistema Operacional: 
+                        span= product.os
+                    li.list-group-item 
+                        strong Cor: 
+                        span= product.color
+                    li.list-group-item 
+                        strong Tamanho do Display: 
+                        span= product.displaySize
+                    li.list-group-item 
+                        strong Processador: 
+                        span= product.cpu
+                    li.list-group-item 
+                        strong Memória RAM: 
+                        span= product.ram

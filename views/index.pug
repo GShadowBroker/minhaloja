@@ -1,106 +1,18 @@
 extends layout
 
 block content
-  .container
-      
-      .row.products
-        if products
-          .col-md.product.card
-            img(src=products[0].image_path class="card-img-top" alt="...")
-            .card-body
-              h5.card-title= products[0].name
-              p.card-text Por Apenas R$ #{products[0].price}
-              a(href="#" class="btn btn-success btn-block") Adicionar
-        else
-          .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-      .row.products
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-      .row.products
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
-        .col-md.product.card
-          img(src="/images/produtos/xiaomi/xiaomi-mi-8-lite.jpg" class="card-img-top" alt="...")
-          .card-body
-            h5.card-title Product Name
-            p.card-text Some description of the product
-            a(href="#" class="btn btn-success btn-block") Adicionar
+	.container
+		.row.products
+			if products
+				each product in products
+					.col-md.product.card
+						a(href=product.url class="stretched-link")
+						span.percentage-off 20% OFF
+						img(src=product.image_path class="card-img-top" alt="...")
+						.card-body
+							h5.card-title= product.name
+							p.card-text Por Apenas 
+								strike.text-muted R$ #{(Math.round((product.price / 0.8) * 100) / 100).toFixed(2)}
+							h3(class="text-success text-center price-tag") R$ #{product.price}
+							
+	

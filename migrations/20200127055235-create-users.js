@@ -39,7 +39,23 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      nome_completo: {
+        type: Sequelize.STRING
+      },
+      cpf: {
+        type: Sequelize.STRING
+      },
+      cep: {
+        type: Sequelize.STRING,
+      },
+      logradouro: Sequelize.STRING,
+      complemento: Sequelize.STRING,
+      bairro: Sequelize.STRING,
+      localidade: Sequelize.STRING,
+      uf: Sequelize.STRING,
+      unidade: Sequelize.STRING,
+      cartao: Sequelize.STRING
     });
   },
   down: (queryInterface, Sequelize) => {
