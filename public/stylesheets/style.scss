@@ -91,6 +91,14 @@ body {
                 background-color: #c0392b;
             }
         }
+        .favorito img {
+            padding: 5px;
+            border-radius: 5px;
+            transition: 200ms;
+            &:hover {
+                background-color: #c0392b;
+            }
+        }
     }
     
 }

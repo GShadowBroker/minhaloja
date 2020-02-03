@@ -69,6 +69,12 @@ body {
     transition: 200ms; }
     .navegacao .container .carrinho img:hover {
       background-color: #c0392b; }
+  .navegacao .container .favorito img {
+    padding: 5px;
+    border-radius: 5px;
+    transition: 200ms; }
+    .navegacao .container .favorito img:hover {
+      background-color: #c0392b; }
 
 .content {
   padding-top: 50px;

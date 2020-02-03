@@ -6,17 +6,36 @@ block content
             .col-2
             .col-8
                 h1 Perfil de #{user.usuario}:
+                h3 Login:
                 ul.list-group
                     li.list-group-item
                         span ID: #{user.id}
                     li.list-group-item
+                        span Nome de usuário: #{user.usuario}
+                    li.list-group-item
                         span E-mail: #{user.email}
-                    li.list-group-item
-                        span Administrador: #{user.isAdmin}
-                    li.list-group-item
-                        span Senha encriptada: #{user.senha}
-                    li.list-group-item
-                        span Último login: #{user.ultimo_login}
-                    li.list-group-item
-                        span Última modificação: #{user.updatedAt}
+                h3 Dados pessoais:
+                small.text-muted Não se preocupe, seus dados estão seguros.
+                li.list-group-item
+                    span Nome completo: #{user.nome_completo}
+                li.list-group-item
+                    span Telefone: #{user.telefone}
+                li.list-group-item
+                    span CPF: #{user.cpf}
+                li.list-group-item
+                    span CEP: #{user.cep}
+                li.list-group-item
+                    span Endereço: #{user.logradouro}
+                li.list-group-item
+                    span Complemento: #{user.complemento}
+                li.list-group-item
+                    span Bairro: #{user.bairro}
+                li.list-group-item
+                    span Cidade: #{user.localidade}
+                li.list-group-item
+                    span Estado/UF: #{user.uf}
+                li.list-group-item
+                    span Unidade: #{user.unidade}
+                li.list-group-item
+                    span Cartão salvo: #{user.cartao}
             .col-2

@@ -16,6 +16,9 @@ const csrfMiddleware = csurf({
 var flash = require('connect-flash');
 var passport = require('passport');
 var session = require('express-session');
+
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 var init = require('./config/passport-config');
 init(passport);
 // var init = require('./config/passport');
@@ -46,12 +49,27 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+var Sequelize = require('sequelize');
+var db = new Sequelize(
+	'minhaloja',
+	'postgres',
+	'ilovebrazil2993', {
+		host: 'localhost',
+		dialect: 'postgres'
+	}
+);
+var sessionStore = new SequelizeStore({
+	db: db
+});
 app.use(session({
 	secret: "keyboard cat",
-	resave: true,
-	saveUninitialized: true,
-	cookie:{maxAge:604000000}
+	store: sessionStore,
+	resave: false,
+	proxy: true,
+	saveUninitialized: false
 }));
+sessionStore.sync();
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());

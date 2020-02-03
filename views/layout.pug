@@ -63,9 +63,14 @@ html(lang="pt-BR")
 									input.form-control(type='text' placeholder='Procurar produto')
 									.input-group-append
 										input.btn.btn-light(type='button' value='Pesquisar')
-						.col-md-4.carrinho
-							a(href="#")
-								img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=40)
+						.col-md-4
+							.col-md-6
+							.col-md-3.favorito
+								a(href="#" title="Meus favoritos")
+									img(src="/images/svg/heart.svg", alt="Meus favoritos" width=40)
+							.col-md-3.carrinho
+								a(href="#" title="Meu carrinho de compras")
+									img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=40)
 			.content#content
 				block content
 			footer

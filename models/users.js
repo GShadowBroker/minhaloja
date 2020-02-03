@@ -83,10 +83,17 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'O cartão informado é inválido.'
         }
       }
+    },
+    telefone: {
+      type: DataTypes.STRING,
+      validate: {
+        isNumber: {
+          msg:'O número de telefone não deve conter caractéres não numéricos.'
+        }
+      }
     }
   }, {});
   users.associate = function(models) {
-    // associations can be defined here
   };
   return users;
 };
