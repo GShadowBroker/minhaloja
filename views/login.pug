@@ -6,6 +6,8 @@ block content
         .row.cadastro-form
             .col-md-4
             .col-md-4
+                if contaCriada.length > 0
+                    span.list-group-item.list-group-item-success.text-center= contaCriada
                 h3 Faça o seu login
                 small(class="text-muted") Ainda não tem uma conta? Faça já o seu cadastro 
                     a(href="/autenticacao/cadastrar") aqui.

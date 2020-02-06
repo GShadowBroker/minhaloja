@@ -1,0 +1,122 @@
+extends layout
+
+block content
+    .container-fluid
+        .row.finalizar-form
+            .col-md-5.d-none.d-sm-block
+                .col-2
+                .col-10.lista-produtos-finalizar
+                    if cart
+                        table.table
+                            thead
+                                tr
+                                    th Produto
+                                    th Qte
+                                    th Preço
+                            tbody
+                                each product in cart.products
+                                    tr
+                                        td
+                                            img(src=product.product.image_path width="40")
+                                            span  #{product.product.name}
+                                        td: span.badge.badge-dark= product.qty
+                                        td= product.product.price
+                            tfooter
+                                tr
+                                    td(colspan="3") Total = R$ #{cart.totalPrice.toFixed(2).toString().replace('.',',')}
+
+            .col-md-5
+                h3 Precisamos de alguns dados antes de concluir a sua compra...
+                
+                form(action="/carrinho/finalizar-compra" method="post")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    .errors-checkout
+                        if errors
+                            h4 Por favor, corrija os seguintes erros:
+                            ul(class="list-group")
+                                each error in errors
+                                    li(class="list-group-item list-group-item-danger")= error.msg
+                        ul(v-if="errors.length > 0" class="list-group")
+                            li(class="list-group-item list-group-item-danger" v-for="error in errors") {{error.message}}
+                    h3 Comprador:
+                    .form-group
+                        label(for="nome_completo") Nome completo
+                        input(class="form-control" name="nome_completo" id="nome_completo" type="text" minlength="2" maxlength="100" required)
+                        small(class="form-text text-muted") Nome e sobrenome
+                    .form-group
+                        label(for="cpf") CPF
+                        input(class="form-control" name="cpf" id="cpf" type="text" minlength="11" required)
+                        small(class="form-text text-muted") Insira apenas números
+
+                    h3 Endereço:
+                    .form-group
+                        label(for="cep") CEP
+                        input(class="form-control" name="cep" id="cep" type="text" minlength="8" required)
+                        small(class="form-text text-muted") Insira apenas números
+                    .form-group
+                        label(for="uf") Estado/UF
+                        select(name='uf' class="custom-select" id="uf")
+                            option(value='') Nenhum Estado selecionado
+                            option(value='AC') Acre
+                            option(value='AL') Alagoas
+                            option(value='AP') Amap&aacute;
+                            option(value='AM') Amazonas
+                            option(value='BA') Bahia
+                            option(value='CE') Cear&aacute;
+                            option(value='DF') Distrito Federal
+                            option(value='ES') Esp&iacute;rito Santo
+                            option(value='GO') Goi&aacute;s
+                            option(value='MA') Maranh&atilde;o
+                            option(value='MT') Mato Grosso
+                            option(value='MS') Mato Grosso do Sul
+                            option(value='MG') Minas Gerais
+                            option(value='PA') Par&aacute;
+                            option(value='PB') Para&iacute;ba
+                            option(value='PR') Paran&aacute;
+                            option(value='PE') Pernambuco
+                            option(value='PI') Piau&iacute;
+                            option(value='RJ') Rio de Janeiro
+                            option(value='RN') Rio Grande do Norte
+                            option(value='RS') Rio Grande do Sul
+                            option(value='RO') Rond&ocirc;nia
+                            option(value='RR') Roraima
+                            option(value='SC') Santa Catarina
+                            option(value='SP') S&atilde;o Paulo
+                            option(value='SE') Sergipe
+                            option(value='TO') Tocantins
+
+                    .form-group
+                        label(for="localidade") Cidade
+                        input(class="form-control" name="localidade" id="localidade" type="text" minlength="2" maxlength="55" required)
+                    .row
+                        .col-10
+                            .form-group
+                                label(for="logradouro") Rua
+                                input(class="form-control" name="logradouro" id="logradouro" type="text" minlength="2" maxlength="100")
+                        .col-2
+                            .form-group
+                                label(for="numero") Número
+                                input(class="form-control" name="numero" id="numero" type="text" maxlength="8")
+                    .form-group
+                        label(for="bairro") Bairro
+                        input(class="form-control" name="bairro" id="bairro" type="text" minlength="2" maxlength="55" required)
+                    .form-group
+                        label(for="complemento") Complemento
+                        input(class="form-control" name="complemento" id="complemento" type="text" maxlength="55")
+                    .row
+                        .col-2
+                            .form-group
+                                label(for="codigo_de_area") Área
+                                input(class="form-control" name="codigo_de_area" id="codigo_de_area" type="tel" maxlength="2" placeholder="(XX)")
+                        .col-10
+                            .form-group
+                                label(for="telefone") Telefone
+                                input(class="form-control" name="telefone" id="telefone" type="tel" maxlength="55" placeholder="XXXX-XXXX")
+                    
+                    
+                    .form-group.form-check
+                        input(type="checkbox" name="concordo" class="form-check-input" id="concordo" @click="toggleRegisterButton")
+                        label(for="concordo" class="form-check-label") Declaro que estes são os meus dados e estou sujeito a paulada caso fornecidos incorretamente.
+                    .form-group
+                        input(type="submit" class="btn btn-success btn-block submit-btn" :class="submitDisabled" value="Confirmar compra" disabled)
+            .col-md-2

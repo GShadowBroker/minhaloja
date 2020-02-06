@@ -11,10 +11,7 @@ router.get('/', function(req, res, next) {
         include:[{all:true}]
     })
         .then(products => {
-            if (!req.user){
-                return res.render('index', {user: null, products});
-            }
-            return res.render('index', {user: req.user, products});
+            return res.render('index', {products});
         })
         .catch(err => console.log(err));
 });

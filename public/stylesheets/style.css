@@ -111,6 +111,27 @@ body {
       margin-left: 15px;
       color: white;
       background-color: #2c3e50; }
+  .content .perfil-block {
+    background-color: white;
+    padding: 60px;
+    border-radius: 5px; }
+  .content .carrinho-block {
+    background-color: white;
+    padding: 60px;
+    border-radius: 5px; }
+    @media screen and (max-width: 768px) {
+      .content .carrinho-block {
+        padding: 5px; } }
+  .content .finalizar {
+    color: white;
+    text-decoration: none;
+    text-decoration-style: none; }
+  .content .lista-produtos-finalizar {
+    position: sticky;
+    top: 80px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px; }
 
 footer {
   position: absolute;

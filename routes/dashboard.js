@@ -7,21 +7,26 @@ const { check, validationResult } = require('express-validator');
 const manufacturers = require('../models').manufacturers;
 const products = require('../models').products;
 
+const csurf = require('csurf');
+const csrfMiddleware = csurf({
+	cookie: true
+});
+
 const router = express.Router();
 
-router.get('/', checkAuthenticated, checkAdmin, (req, res) => {
+router.get('/', checkAuthenticated, csrfMiddleware, checkAdmin, (req, res) => {
     manufacturers.findAll({
         order:[
             ['name','ASC']
         ]
     })
         .then(manufacturersList => {
-            res.render('painel', {manufacturersList: manufacturersList, user: req.user});
+            res.render('painel', {manufacturersList: manufacturersList, csrfToken: req.csrfToken()});
         })
         .catch(err => console.log(err));
 });
 
-router.post('/', (req, res) => {
+router.post('/', csrfMiddleware, (req, res) => {
 
     let errors = [];
 
@@ -63,7 +68,7 @@ router.post('/', (req, res) => {
         // If there are errors
         if (errors.length > 0) {
             console.log(errors);
-            res.render('painel', {errors, user: req.user});
+            res.render('painel', {errors, csrfToken: req.csrfToken()});
         } else {
             manufacturers.findByPk(req.body.manufacturerId)
                 .then(manufacturer => {
@@ -80,7 +85,7 @@ router.post('/', (req, res) => {
                     })
                         .then(product => {
                             console.log(product);
-                            res.render('painel', {alert:'Produto criado com sucesso!', user: req.user});
+                            res.render('painel', {alert:'Produto criado com sucesso!', csrfToken: req.csrfToken()});
                         })
                         .catch(err => console.log(err));
                 })
@@ -99,13 +104,13 @@ router.post('/', (req, res) => {
 
         if (errors.length > 0){
             console.log(errors.array());
-            return res.status(422).render('painel', {errors: errors, user: req.user});
+            return res.status(422).render('painel', {errors: errors, csrfToken: req.csrfToken()});
         }
         return manufacturers.create({
             name: req.body.name
         })
             .then(manufacturer => {
-                res.render('painel', {alert: 'Fabricante criado com sucesso', user: req.user});
+                res.render('painel', {alert: 'Fabricante criado com sucesso', csrfToken: req.csrfToken()});
             })
             .catch(err => console.log(err));
     }

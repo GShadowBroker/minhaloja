@@ -8,6 +8,7 @@
     "launch": "SET DEBUG=minhaloja:* & npm run dev"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-session-sequelize": "^6.0.0",
@@ -25,7 +26,8 @@
     "pg": "^7.17.1",
     "pg-hstore": "^2.3.3",
     "pug": "^2.0.4",
-    "sequelize": "^5.21.3"
+    "sequelize": "^5.21.3",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

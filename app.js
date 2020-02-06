@@ -15,6 +15,7 @@ const csrfMiddleware = csurf({
 
 var flash = require('connect-flash');
 var passport = require('passport');
+var Sequelize = require('sequelize') //added manually
 var session = require('express-session');
 
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -26,10 +27,11 @@ init(passport);
 
 var indexRouter = require('./routes/index');
 var authenticationRouter = require('./routes/authentication');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/tests'); // REMOVE IN PRODUCTION!
 var profileRouter = require('./routes/profile');
 var dashboardRouter = require('./routes/dashboard');
 var productsRouter = require('./routes/products');
+var cartRouter = require('./routes/shoppingcart');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,11 +51,10 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-var Sequelize = require('sequelize');
 var db = new Sequelize(
-	'minhaloja',
+	process.env.DB_NAME,
 	'postgres',
-	'ilovebrazil2993', {
+	process.env.DB_PASSWORD, {
 		host: 'localhost',
 		dialect: 'postgres'
 	}
@@ -62,24 +63,32 @@ var sessionStore = new SequelizeStore({
 	db: db
 });
 app.use(session({
-	secret: "keyboard cat",
+	secret: process.env.SESSION_SECRET,
 	store: sessionStore,
 	resave: false,
 	proxy: true,
 	saveUninitialized: false
 }));
-sessionStore.sync();
 
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req, res, next) { // Allows me to access objects without passing them to the view explicitly
+	res.locals.login = req.isAuthenticated();
+	res.locals.session = req.session;
+	res.locals.user = req.user;
+	res.locals.cart = req.session.cart;
+	next();
+});
+
 app.use('/', indexRouter);
 app.use('/autenticacao', authenticationRouter);
-app.use('/usuarios', usersRouter);
+app.use('/testes', usersRouter); // REMOVE IN PRODUCTION!
 app.use('/minhaconta', profileRouter);
 app.use('/painel-de-controle', dashboardRouter);
 app.use('/produtos', productsRouter);
+app.use('/carrinho', cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

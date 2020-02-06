@@ -1,3 +1,8 @@
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$extra: 1200px;
+
 html {
     margin: 0;
     padding: 0;
@@ -145,6 +150,32 @@ body {
             color: white;
             background-color: #2c3e50;
         }
+    }
+    .perfil-block {
+        background-color: white;
+        padding: 60px;
+        border-radius: 5px;
+    }
+    .carrinho-block {
+        background-color: white;
+        padding: 60px;
+        border-radius: 5px;
+
+        @media screen and (max-width:$medium){
+            padding: 5px;
+        }
+    }
+    .finalizar {
+        color: white;
+        text-decoration: none;
+        text-decoration-style: none;
+    }
+    .lista-produtos-finalizar {
+        position: sticky;
+        top: 80px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
     }
 }
 

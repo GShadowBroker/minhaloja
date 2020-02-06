@@ -17,7 +17,7 @@ const csrfMiddleware = csurf({
 const router = express.Router();
 
 router.get('/cadastrar', checkNotAuthenticated, csrfMiddleware, (req, res) => {
-    res.render('cadastro', {user:req.user, csrfToken: req.csrfToken()});
+    res.render('cadastro', {csrfToken: req.csrfToken()});
 });
 
 router.post('/cadastrar', [
@@ -60,6 +60,7 @@ router.post('/cadastrar', [
                 senha: hash
             })
                 .then(() => {
+                    req.flash('contaCriada', 'Conta criada com sucesso!');
                     res.redirect('/autenticacao/login');
                 })
                 .catch(err => console.log(err));
@@ -68,7 +69,7 @@ router.post('/cadastrar', [
 });
 
 router.get('/login', checkNotAuthenticated, csrfMiddleware, (req, res) => {
-    res.render('login', {message: req.flash('error'), csrfToken: req.csrfToken()});
+    res.render('login', {contaCriada: req.flash('contaCriada'), message: req.flash('error'), csrfToken: req.csrfToken()});
 });
 
 router.post('/login', passport.authenticate('local', {

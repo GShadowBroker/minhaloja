@@ -4,18 +4,23 @@ block content
     .container
         .row
             .col-2
-            .col-8
+            .col-8.perfil-block
                 h1 Perfil de #{user.usuario}:
+                br
                 h3 Login:
                 ul.list-group
                     li.list-group-item
                         span ID: #{user.id}
                     li.list-group-item
+                        span ID da sessão atual: #{session.id}
+                    li.list-group-item
                         span Nome de usuário: #{user.usuario}
                     li.list-group-item
                         span E-mail: #{user.email}
+                br
                 h3 Dados pessoais:
                 small.text-muted Não se preocupe, seus dados estão seguros.
+                br
                 li.list-group-item
                     span Nome completo: #{user.nome_completo}
                 li.list-group-item

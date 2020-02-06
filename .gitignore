@@ -3,3 +3,5 @@ seeders
 .env
 /.vscode
 teste.js
+tests.js
+teste.pug

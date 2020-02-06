@@ -9,6 +9,9 @@ block content
                 h3 Cadastrar em nossa loja é rápido e simples!
                 small(class="text-muted") Se você já tem uma conta, faça o seu login 
                     a(href="/autenticacao/login") aqui.
+                br
+                small(class="text-muted") Se você já tem uma conta, mas esqueceu sua senha, siga as instruções  
+                    a(href="#") aqui.
                 hr
                 form(action="/autenticacao/cadastrar" class="register-form" method="post" @submit.prevent="handleSubmitRegister")
                     input(type="hidden" name="_csrf" value=csrfToken)

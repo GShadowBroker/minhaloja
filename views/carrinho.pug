@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    .container.carrinho-block
+        .row
+            .col-2
+            .col-8
+                h3 Meu Carrinho de Compras
+                if cart
+                    table.table.table-responsive
+                        thead
+                            tr
+                                th(scope="col") Produto
+                                th(scope="col") Quantidade
+                                th(scope="col") Preço
+                                th(scope="col") #
+                        tbody
+                            each product in cart.products
+                                tr
+                                    td
+                                        .row
+                                            .col-2
+                                                img(src=product.product.image_path, alt=product.product.name width="60")
+                                            .col-10
+                                                span= product.product.name
+                                                p.text-muted Cód. #{product.product.id}
+                                    td: span.badge.badge-dark= product.qty
+                                    td= product.price
+                                    td
+                                        .dropdown
+                                            button(class="btn btn-danger dropdown-toggle" type="button" id="dropDownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Excluir
+                                            div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                                a(class="dropdown-item" href=`/carrinho/remover-do-carrinho/${product.product.id}`) Excluir um
+                                                a(class="dropdown-item" href=`#`) Excluir todos
+                        tfooter
+                            tr
+                                td(colspan="4" class="text-right"): h4 Total = R$ #{cart.totalPrice.toFixed(2).toString().replace('.',',')}
+
+                    a(href="/carrinho/finalizar-compra" class="finalizar btn btn-success") Finalizar compra
+
+                else
+                    span.list-group-item.list-group-item-danger.text-center Não há itens no seu carrinho.
+            .col-2
+        

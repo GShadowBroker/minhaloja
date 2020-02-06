@@ -11,18 +11,18 @@ block content
                 span.text-muted (Cód. #{product.id})
                 hr
                 p De: R$ 
-                    strike #{(Math.round((product.price / 0.8) * 100) / 100).toFixed(2)} 
+                    strike #{product.price} 
                     span.text-success (20% de desconto) 
                 |Por Apenas:
-                h2: strong R$ #{product.price}
+                h2: strong R$ #{(Math.round(product.price * 100) / 100).toFixed(2).toString().replace('.',',')}
                 hr
                 .row
                     .col-6
-                        form(action="" method="post")
-                            input(class="btn btn-success btn-block" type="submit" value="+ lista de desejos")
+                        form(action="" method="get")
+                            input(type="hidden", name="_csrf" value=csrfToken)
+                            input(class="btn btn-success btn-block" type="submit" value="Adicionar à lista de desejos")
                     .col-6
-                        form(action="" method="post")
-                            input(class="btn btn-success btn-block" type="submit" value="+ carrinho")
+                        a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` class="btn btn-success btn-block") Adicionar ao carrinho
             .col-1
         .row.product-details
             h4.description Descrição do produto:
