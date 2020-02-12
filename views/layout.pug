@@ -12,38 +12,66 @@ html(lang="pt-BR")
 		link(rel='stylesheet' href='/stylesheets/style.css')
 		title Loja
 	body
+		.blur-overlay
+		.hamburger-nav
+			button(type="button" class="close" aria-label="Close" onclick="closeNav()")
+				span(aria-hidden="true") &times;
+			.menu-hamburger.list-group.list-group-flush
+				a(href='/' class="list-group-item list-group-item-action text-nowrap")
+					img(src="/images/svg/sydney-opera-house.svg", alt="Home" width=20)
+					span  Home
+				a(href='#' class="list-group-item list-group-item-action text-nowrap")
+					img(src="/images/svg/apple.svg", alt="Apple" width=20)
+					span  Apple
+				a(href='#' class="list-group-item list-group-item-action text-nowrap")
+					img(src="/images/svg/lg.svg", alt="LG" width=20)
+					span  LG
+				a(href='#' class="list-group-item list-group-item-action text-nowrap")
+					img(src="/images/svg/motorola.svg", alt="Motorola" width=20)
+					span  Motorola
+				a(href='#' class="list-group-item list-group-item-action text-nowrap")
+					img(src="/images/svg/samsung.svg", alt="Samsung" width=20)
+					span  Samsung
+				a(href='#' class="list-group-item list-group-item-action text-nowrap")
+					img(src="/images/svg/xiaomi.svg", alt="Xiaomi" width=20)
+					span  Xiaomi
 		.wrapper#root
-			if alert
-				.alert
-					span.text-success #{alert}
-			.header.d-none.d-sm-block
-				.container
-					.row
-						.col-md-6.loja-title
-							h1 Minha Loja
-						.col-md-6.menu-conta
-							if user
-								ul.menu-conta
-									li Ol&aacute;, #{user.usuario}!
-									if user.isAdmin
+			.loading
+				div(class="spinner-grow" role="status")
+					span(class="sr-only") Loading...
+				div(class="spinner-grow" role="status")
+					span(class="sr-only") Loading...
+				div(class="spinner-grow" role="status")
+					span(class="sr-only") Loading...
+			block header
+				.header.d-none.d-lg-block
+					.container
+						.row
+							.col-5.loja-title
+								h1 Minha Loja
+							.col-7.menu-conta
+								if user
+									ul.menu-conta
+										li Ol&aacute;, #{user.usuario}!
+										if user.isAdmin
+											li
+												a(href='/painel-de-controle') Painel de controle
 										li
-											a(href='/painel-de-controle') Painel de controle
-									li
-										a(href='/minhaconta') Minha conta
-									li
-										a(href='#') Ajuda
-									li
-										a(href='/autenticacao/logout') Sair
-							else
-								ul.menu-conta
-									li
-										a(href='/autenticacao/login') Entrar
-									li
-										a(href='/autenticacao/cadastrar') Cadastrar
-			.navegacao.d-none.d-sm-block
+											a(href='/minhaconta') Minha conta
+										li
+											a(href='#') Ajuda
+										li
+											a(href='/autenticacao/logout') Sair
+								else
+									ul.menu-conta
+										li
+											a(href='/autenticacao/login') Entrar
+										li
+											a(href='/autenticacao/cadastrar') Cadastrar
+			.navegacao
 				.container
 					.row
-						.col-md-4
+						.nav-left.nav-section.d-none.d-lg-flex.col-sm-4
 							ul
 								li
 									a(href='/') HOME
@@ -57,25 +85,58 @@ html(lang="pt-BR")
 									a(href='#') Samsung
 								li
 									a(href='#') Xiaomi
-						.col-md-4.input-wrapper
+						.nav-left.nav-section.col-sm-4.d-flex.d-lg-none.col-2
+							.nav-icon.dropdown
+								a(title="Menu" class="hamburger-btn" @click="openNav")
+									img(src="/images/svg/menu.svg", alt="Menu" width=40)
+						.nav-center.nav-section.col-sm-4.col-lg-4.d-none.d-sm-flex
 							form(method='get' action='')
 								.input-group
-									input.form-control(type='text' placeholder='Procurar produto')
+									input.form-control.search-form(type='text' placeholder='Procurar produto')
 									.input-group-append
-										button.btn.btn-light(type='submit')
+										button.btn.btn-light.bg-none(type='submit')
 											img(src="/images/svg/search.svg", alt="Procurar" width="20")
-						.col-md-4
-							.col-md-6
-							.col-md-3.favorito
-								a(href="#" title="Meus favoritos")
+									
+						.nav-right.nav-section.col-sm-4.col-lg-4.col-10
+							.nav-icon.px-1.px-md-2
+								a(href="#" title="Entrar" class="login-button")
+									img(src="/images/svg/user.svg", alt="Entrar" width=40)
+							.nav-icon.px-1.px-md-2
+								a(href="/favoritos" title="Meus favoritos")
 									img(src="/images/svg/heart.svg", alt="Meus favoritos" width=40)
-							.col-md-3.carrinho
+							.nav-icon.px-1.px-md-2
 								a(href="/carrinho" title="Meu carrinho de compras")
-									img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=40)
+									img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=42)
 									if cart
 										span.badge.badge-light= cart.totalQty
 									else
 										span.badge.badge-light 0
+			.login-box
+				.login-arrow
+				.login-innerbox
+					if user
+						ul.list-group.menu-conta
+							span.list-group-item: strong.text-center Ol&aacute;, #{user.usuario}!
+							if user.isAdmin
+								a(href='/painel-de-controle' class="list-group-item list-group-item-action")
+									img(src="/images/svg/process.svg", alt="Painel administrativo" width=20)
+									span  Painel de controle
+							a(href='/minhaconta' class="list-group-item list-group-item-action")
+								img(src="/images/svg/user.svg", alt="Minha conta" width=20)
+								span  Minha conta
+							a(href='#' class="list-group-item list-group-item-action")
+								img(src="/images/svg/question.svg", alt="Ajuda" width=20)
+								span  Ajuda
+							a(href='/autenticacao/logout' class="list-group-item list-group-item-action")
+								img(src="/images/svg/logout.svg", alt="Sair" width=20)
+								span  Sair
+					else
+						.menu-conta
+							.text-muted.text-center Não tem uma conta? É fácil se cadastrar!
+							hr
+							a(href='/autenticacao/login' class="btn btn-primary btn-block") Entrar
+							a(href='/autenticacao/cadastrar' class="btn btn-secondary btn-block") Cadastrar
+
 			.content#content
 				block content
 			footer

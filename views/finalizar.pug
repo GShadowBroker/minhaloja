@@ -25,9 +25,9 @@ block content
                                 tr
                                     td(colspan="3") Total = R$ #{cart.totalPrice.toFixed(2).toString().replace('.',',')}
 
-            .col-md-5
-                h3 Precisamos de alguns dados antes de concluir a sua compra...
-                
+            .col-md-5.auth-form.bg-white.shadow-sm
+                h3 Precisamos de alguns dados antes de concluir a sua compra
+                hr
                 form(action="/carrinho/finalizar-compra" method="post")
                     input(type="hidden" name="_csrf" value=csrfToken)
                     .errors-checkout
@@ -47,43 +47,46 @@ block content
                         label(for="cpf") CPF
                         input(class="form-control" name="cpf" id="cpf" type="text" minlength="11" required)
                         small(class="form-text text-muted") Insira apenas números
-
+                    hr
                     h3 Endereço:
-                    .form-group
-                        label(for="cep") CEP
-                        input(class="form-control" name="cep" id="cep" type="text" minlength="8" required)
-                        small(class="form-text text-muted") Insira apenas números
-                    .form-group
-                        label(for="uf") Estado/UF
-                        select(name='uf' class="custom-select" id="uf")
-                            option(value='') Nenhum Estado selecionado
-                            option(value='AC') Acre
-                            option(value='AL') Alagoas
-                            option(value='AP') Amap&aacute;
-                            option(value='AM') Amazonas
-                            option(value='BA') Bahia
-                            option(value='CE') Cear&aacute;
-                            option(value='DF') Distrito Federal
-                            option(value='ES') Esp&iacute;rito Santo
-                            option(value='GO') Goi&aacute;s
-                            option(value='MA') Maranh&atilde;o
-                            option(value='MT') Mato Grosso
-                            option(value='MS') Mato Grosso do Sul
-                            option(value='MG') Minas Gerais
-                            option(value='PA') Par&aacute;
-                            option(value='PB') Para&iacute;ba
-                            option(value='PR') Paran&aacute;
-                            option(value='PE') Pernambuco
-                            option(value='PI') Piau&iacute;
-                            option(value='RJ') Rio de Janeiro
-                            option(value='RN') Rio Grande do Norte
-                            option(value='RS') Rio Grande do Sul
-                            option(value='RO') Rond&ocirc;nia
-                            option(value='RR') Roraima
-                            option(value='SC') Santa Catarina
-                            option(value='SP') S&atilde;o Paulo
-                            option(value='SE') Sergipe
-                            option(value='TO') Tocantins
+                    .row
+                        .col-6
+                            .form-group
+                                label(for="cep") CEP
+                                input(class="form-control" name="cep" id="cep" type="text" minlength="8" required)
+                                small(class="form-text text-muted") Insira apenas números
+                        .col-6
+                            .form-group
+                                label(for="uf") Estado/UF
+                                select(name='uf' class="custom-select" id="uf")
+                                    option(value='') Nenhum Estado selecionado
+                                    option(value='AC') Acre
+                                    option(value='AL') Alagoas
+                                    option(value='AP') Amap&aacute;
+                                    option(value='AM') Amazonas
+                                    option(value='BA') Bahia
+                                    option(value='CE') Cear&aacute;
+                                    option(value='DF') Distrito Federal
+                                    option(value='ES') Esp&iacute;rito Santo
+                                    option(value='GO') Goi&aacute;s
+                                    option(value='MA') Maranh&atilde;o
+                                    option(value='MT') Mato Grosso
+                                    option(value='MS') Mato Grosso do Sul
+                                    option(value='MG') Minas Gerais
+                                    option(value='PA') Par&aacute;
+                                    option(value='PB') Para&iacute;ba
+                                    option(value='PR') Paran&aacute;
+                                    option(value='PE') Pernambuco
+                                    option(value='PI') Piau&iacute;
+                                    option(value='RJ') Rio de Janeiro
+                                    option(value='RN') Rio Grande do Norte
+                                    option(value='RS') Rio Grande do Sul
+                                    option(value='RO') Rond&ocirc;nia
+                                    option(value='RR') Roraima
+                                    option(value='SC') Santa Catarina
+                                    option(value='SP') S&atilde;o Paulo
+                                    option(value='SE') Sergipe
+                                    option(value='TO') Tocantins
 
                     .form-group
                         label(for="localidade") Cidade
@@ -113,7 +116,7 @@ block content
                                 label(for="telefone") Telefone
                                 input(class="form-control" name="telefone" id="telefone" type="tel" maxlength="55" placeholder="XXXX-XXXX")
                     
-                    
+                    hr
                     .form-group.form-check
                         input(type="checkbox" name="concordo" class="form-check-input" id="concordo" @click="toggleRegisterButton")
                         label(for="concordo" class="form-check-label") Declaro que estes são os meus dados e estou sujeito a paulada caso fornecidos incorretamente.

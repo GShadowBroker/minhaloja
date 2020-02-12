@@ -1,0 +1,86 @@
+extends ../layout
+
+block content
+    .container
+        .row
+            .col-.col-md-4
+                ul.list-group
+                    a(href="/minhaconta" class="list-group-item list-group-item-action active")
+                        img(src="/images/svg/user.svg" alt="Meus dados" width="20")
+                        span  Meus dados
+                    a(href="/minhaconta/compras" class="list-group-item list-group-item-action")
+                        img(src="/images/svg/pay.svg" alt="Minhas compras" width="20")
+                        span  Minhas compras
+                    a(href="/carrinho" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center")
+                        .wrapper-menu-cart
+                            img(src="/images/svg/cart.svg" alt="Meu carrinho" width="20")
+                            span  Meu carrinho
+                        if cart
+                            if cart.products.length === 0
+                                span.badge.badge-secondary.badge-pill 0
+                            else
+                                span.badge.badge-secondary.badge-pill= cart.totalQty
+                        else
+                            span.badge.badge-secondary.badge-pill 0
+                    a(href="/favoritos" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center")
+                        .wrapper-menu-cart
+                            img(src="/images/svg/heart.svg" alt="Meus favoritos" width="20")
+                            span  Meus favoritos
+                        if favorites
+                            if favorites.qty === 0
+                                span.badge.badge-secondary.badge-pill 0
+                            else
+                                span.badge.badge-secondary.badge-pill= favorites.qty
+                        else
+                            span.badge.badge-secondary.badge-pill 0
+                    a(href="#" class="list-group-item list-group-item-action")
+                        img(src="/images/svg/password.svg" alt="Privacidade" width="20")
+                        span  Privacidade
+                    a(href="/autenticacao/logout" class="list-group-item list-group-item-action")
+                        img(src="/images/svg/logout.svg" alt="Sair" width="20")
+                        span  Sair
+            .minha-conta-content.col-.col-md-8.mt-4.mt-sm-0
+                .row.border.rounded.bg-white
+                    .col.p-1.p-md-4
+                        h2 Perfil de #{user.usuario}:
+                        
+                        h4 Login:
+                        small.text-muted Estas são suas informações de autenticação.
+                        br
+                        ul.list-group.list-group-flush
+                            li.list-group-item ID: 
+                                span.text-muted #{user.id}
+                            li.list-group-item ID da sessão atual: 
+                                span.text-muted #{session.id}
+                            li.list-group-item Nome de usuário: 
+                                span.text-muted #{user.usuario}
+                            li.list-group-item E-mail: 
+                                span.text-muted #{user.email}
+                        br
+                        h4 Dados pessoais:
+                        small.text-muted Estes são os seus dados salvos no site. Não se preocupe, eles estão seguros. Leia nossas 
+                            a(href="#") Políticas de Privacidade.
+                        br
+                        ul.list-group.list-group-flush
+                            li.list-group-item Nome completo: 
+                                span.text-muted #{user.nome_completo}
+                            li.list-group-item Telefone: 
+                                span.text-muted #{user.telefone}
+                            li.list-group-item CPF: 
+                                span.text-muted #{user.cpf}
+                            li.list-group-item CEP: 
+                                span.text-muted #{user.cep}
+                            li.list-group-item Endereço: 
+                                span.text-muted #{user.logradouro}
+                            li.list-group-item Complemento: 
+                                span.text-muted #{user.complemento}
+                            li.list-group-item Bairro: 
+                                span.text-muted #{user.bairro}
+                            li.list-group-item Cidade: 
+                                span.text-muted #{user.localidade}
+                            li.list-group-item Estado/UF: 
+                                span.text-muted #{user.uf}
+                            li.list-group-item Unidade: 
+                                span.text-muted #{user.unidade}
+                            li.list-group-item Cartão salvo: 
+                                span.text-muted #{user.cartao}

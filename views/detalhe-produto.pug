@@ -1,29 +1,40 @@
 extends layout
 
 block content
-    .container
+    .container.bg-white.border.rounded.shadow-sm
         .row.product-details.text-right
-            .col-1
-            .col-4.product-image
-                img(src=product.image_path, alt="", width="100%")
-            .col-6.product-card
+            .col-.col-sm-5.product-image
+                img(src=product.image_path, class="img-responsive", alt=product.name, width="100%")
+            .col-.col-sm-7.product-card
                 h1= product.name
                 span.text-muted (Cód. #{product.id})
                 hr
                 p De: R$ 
-                    strike #{product.price} 
+                    strike #{(Math.round((product.price / 0.8) * 100) / 100).toFixed(2).replace('.',',')} 
                     span.text-success (20% de desconto) 
                 |Por Apenas:
                 h2: strong R$ #{(Math.round(product.price * 100) / 100).toFixed(2).toString().replace('.',',')}
+                |Ou até
+                h3 12x de #{(Math.round(product.price * 100) / 1200).toFixed(2).toString().replace('.',',')} sem juros
                 hr
-                .row
-                    .col-6
-                        form(action="" method="get")
-                            input(type="hidden", name="_csrf" value=csrfToken)
-                            input(class="btn btn-success btn-block" type="submit" value="Adicionar à lista de desejos")
-                    .col-6
-                        a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` class="btn btn-success btn-block") Adicionar ao carrinho
-            .col-1
+                
+                .row.row-cols-1.row-cols-lg-2
+                    .col.favorito-btn
+                        if favorites
+                            if product.id in favorites.products
+                                a(class="btn btn-outline-success btn-block disabled" disabled="true") Adicionado à lista de desejos
+                            else
+                                a(href=`/favoritos/adicionar-aos-favoritos/${product.id}` class="btn btn-success btn-block") Adicionar à lista de desejos
+                        else
+                            a(href=`/favoritos/adicionar-aos-favoritos/${product.id}` class="btn btn-outline-success btn-block") Adicionar à lista de desejos
+                    .col.carrinho-btn
+                        if cart
+                            if product.id in cart.products
+                                a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` class="btn btn-success btn-block") Adicionar mais ao carrinho
+                            else
+                                a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` class="btn btn-success btn-block") Adicionar ao carrinho
+                        else
+                            a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` class="btn btn-success btn-block") Adicionar ao carrinho
         .row.product-details
             h4.description Descrição do produto:
             .col-12

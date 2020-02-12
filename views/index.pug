@@ -2,17 +2,49 @@ extends layout
 
 block content
 	.container
-		.row.products
+		.row.sub-banner.bg-white.border.rounded.shadow-sm
+			.col-.col-md-3.subbanner-img
+				img(src="/images/svg/undraw_mobile_web_2g8b.svg" class="img-fluid max-width" alt="Smartphone")
+			.col-.col-md-8.subbanner-text
+				h1.text-dark.text-justify Só aqui você encontra as melhores 
+					span.ofertas-text OFERTAS!
+				hr
+				h3.text-dark.text-justify Compre aqui o seu smartphone com 
+					span.badge.badge-success.frete-subbanner FRETE GRÁTIS 
+					span  em até 
+					span.badge.badge-success.juros-subbanner  12x SEM JUROS!
+
+		.row.products.justify-content-center
 			if products
 				each product in products
-					.col-md.product.card
+					.col-1.col-sm.product.card.m-2.border
 						a(href=product.url class="stretched-link")
+						.product-icons.rounded
+							if cart
+								if product.id in cart.products
+									a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` title="Adicionar mais ao carrinho" class="carrinho-product p-2 rounded-left")
+										img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=25)
+								else
+									a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` title="Adicionar ao meu carrinho" class="carrinho-product p-2 rounded-left")
+										img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=25)
+							else
+								a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` title="Adicionar ao meu carrinho" class="carrinho-product p-2 rounded-left")
+									img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=25)
+							if favorites
+								if product.id in favorites.products
+									a(href="javascript:void(0)" title="Já está em seus favoritos" class="favoritos-product p-2 rounded-right added disabled")
+										img(src="/images/svg/heart.svg", alt="Meus favoritos" width=25)
+								else
+									a(href=`/favoritos/adicionar-aos-favoritos/${product.id}` title="Adicionar aos meus favoritos" class="favoritos-product p-2 rounded-right")
+										img(src="/images/svg/heart.svg", alt="Meus favoritos" width=25)
+							else
+								a(href=`/favoritos/adicionar-aos-favoritos/${product.id}` title="Adicionar aos meus favoritos" class="favoritos-product p-2 rounded-right")
+									img(src="/images/svg/heart.svg", alt="Meus favoritos" width=25)
 						span.percentage-off 20% OFF
-						img(src=product.image_path class="card-img-top" alt="...")
+						img(src=product.image_path class="card-img-top" alt=product.name class="img-product")
 						.card-body
 							h5.card-title= product.name
 							p.card-text Por Apenas 
 								strike.text-muted R$ #{(Math.round((product.price / 0.8) * 100) / 100).toFixed(2).replace('.',',')}
-							h3(class="text-success text-center price-tag") R$ #{(Math.round(product.price * 100) / 100).toFixed(2).toString().replace('.',',')}
-							
+							h4(class="text-success text-center price-tag") R$ #{(Math.round(product.price * 100) / 100).toFixed(2).toString().replace('.',',')}
 	

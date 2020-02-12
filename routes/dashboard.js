@@ -21,7 +21,7 @@ router.get('/', checkAuthenticated, csrfMiddleware, checkAdmin, (req, res) => {
         ]
     })
         .then(manufacturersList => {
-            res.render('painel', {manufacturersList: manufacturersList, csrfToken: req.csrfToken()});
+            res.render('admin/painel', {manufacturersList: manufacturersList, csrfToken: req.csrfToken()});
         })
         .catch(err => console.log(err));
 });
@@ -68,7 +68,7 @@ router.post('/', csrfMiddleware, (req, res) => {
         // If there are errors
         if (errors.length > 0) {
             console.log(errors);
-            res.render('painel', {errors, csrfToken: req.csrfToken()});
+            res.render('admin/painel', {errors, csrfToken: req.csrfToken()});
         } else {
             manufacturers.findByPk(req.body.manufacturerId)
                 .then(manufacturer => {
@@ -85,7 +85,7 @@ router.post('/', csrfMiddleware, (req, res) => {
                     })
                         .then(product => {
                             console.log(product);
-                            res.render('painel', {alert:'Produto criado com sucesso!', csrfToken: req.csrfToken()});
+                            res.render('admin/painel', {alert:'Produto criado com sucesso!', csrfToken: req.csrfToken()});
                         })
                         .catch(err => console.log(err));
                 })
@@ -110,7 +110,7 @@ router.post('/', csrfMiddleware, (req, res) => {
             name: req.body.name
         })
             .then(manufacturer => {
-                res.render('painel', {alert: 'Fabricante criado com sucesso', csrfToken: req.csrfToken()});
+                res.render('admin/painel', {alert: 'Fabricante criado com sucesso', csrfToken: req.csrfToken()});
             })
             .catch(err => console.log(err));
     }

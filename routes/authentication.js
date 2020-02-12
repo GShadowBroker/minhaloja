@@ -17,7 +17,7 @@ const csrfMiddleware = csurf({
 const router = express.Router();
 
 router.get('/cadastrar', checkNotAuthenticated, csrfMiddleware, (req, res) => {
-    res.render('cadastro', {csrfToken: req.csrfToken()});
+    res.render('authentication/cadastro', {csrfToken: req.csrfToken()});
 });
 
 router.post('/cadastrar', [
@@ -49,7 +49,7 @@ router.post('/cadastrar', [
 
     if (!errors.isEmpty()){
         console.log(errors.array());
-        return res.status(422).render('cadastro', { errors: errors.array(), csrfToken: req.csrfToken() });
+        return res.status(422).render('authentication/cadastro', { errors: errors.array(), csrfToken: req.csrfToken() });
     }
 
     bcrypt.genSalt(10, function(err, salt){
@@ -69,7 +69,7 @@ router.post('/cadastrar', [
 });
 
 router.get('/login', checkNotAuthenticated, csrfMiddleware, (req, res) => {
-    res.render('login', {contaCriada: req.flash('contaCriada'), message: req.flash('error'), csrfToken: req.csrfToken()});
+    res.render('authentication/login', {contaCriada: req.flash('contaCriada'), message: req.flash('error'), csrfToken: req.csrfToken()});
 });
 
 router.post('/login', passport.authenticate('local', {

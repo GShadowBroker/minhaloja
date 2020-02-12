@@ -16,13 +16,29 @@ module.exports = function Cart(oldCart) {
     };
 
     
-    this.remove = function(product, id) {
+    this.removeOne = function(id) {
         let storedProduct = this.products[id];
 
         storedProduct.qty--;
         storedProduct.price = storedProduct.product.price * storedProduct.qty;
         this.totalQty--;
         this.totalPrice -= storedProduct.product.price;
+
+        if (storedProduct.qty === 0){
+            delete this.products[id];
+        }
+    };
+
+    this.removeAll = function(id) {
+        let storedProduct = this.products[id];
+
+        this.totalQty -= storedProduct.qty;
+        this.totalPrice -= storedProduct.price;
+
+        storedProduct.qty = 0;
+        storedProduct.price = 0;
+
+        delete this.products[id];
     };
 
     this.getArray = function() {

@@ -1,17 +1,17 @@
-extends layout
+extends ../layout
 
 block content
     
     .container
-        .row.cadastro-form
+        .row
             .col-md-4
-            .col-md-4
-                if contaCriada.length > 0
-                    span.list-group-item.list-group-item-success.text-center= contaCriada
+            .col-md-4.auth-form.bg-white.shadow-sm
                 h3 Faça o seu login
                 small(class="text-muted") Ainda não tem uma conta? Faça já o seu cadastro 
                     a(href="/autenticacao/cadastrar") aqui.
                 hr
+                if contaCriada.length > 0
+                    span.list-group-item.list-group-item-success.text-center= contaCriada
                 .error
                     if message.length > 0
                         p(class="list-group-item list-group-item-danger") #{message}

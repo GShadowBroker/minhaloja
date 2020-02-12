@@ -4,6 +4,7 @@ const express = require('express');
 const checkAuthenticated = require('./login_redirects/checkAuthenticated');
 const products = require('../models').products;
 const Cart = require('../models/Virtual models/cart');
+const Favorites = require('../models/Virtual models/favorites');
 const axios = require('axios').default;
 var parseString = require('xml2js').parseString;
 
@@ -16,7 +17,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    res.render('carrinho', {cart: req.session.cart});
+    res.render('account/carrinho', {cart: req.session.cart});
 });
 
 router.get('/adicionar-ao-carrinho/:id', (req, res) => {
@@ -27,7 +28,7 @@ router.get('/adicionar-ao-carrinho/:id', (req, res) => {
         .then(product => {
             cart.add(product, product.id);
             req.session.cart = cart;
-            res.redirect('/');
+            res.redirect(`/produtos/${productId}`);
         })
         .catch(err => console.log(err));
 });
@@ -38,15 +39,45 @@ router.get('/remover-do-carrinho/:id', (req, res) => {
 
     products.findByPk(productId)
         .then(product => {
-            cart.remove(product, product.id);
-            req.session.cart = cart;
-            res.redirect('/');
+            cart.removeOne(product.id);
+
+            if (cart.totalQty === 0) {
+                req.session.cart = undefined;
+                return res.redirect('/carrinho');
+
+            } else {
+                req.session.cart = cart;
+                return res.redirect('/carrinho');
+            }
+            
+        })
+        .catch(err => console.log(err));
+});
+
+
+router.get('/remover-tudo-do-carrinho/:id', (req, res) => {
+    const productId = req.params.id;
+    let cart = new Cart(req.session.cart ? req.session.cart : {});
+
+    products.findByPk(productId)
+        .then(product => {
+            cart.removeAll(product.id);
+
+            if (cart.totalQty === 0) {
+                req.session.cart = undefined;
+                return res.redirect('/carrinho');
+
+            } else {
+                req.session.cart = cart;
+                return res.redirect('/carrinho');
+            }
+            
         })
         .catch(err => console.log(err));
 });
 
 router.get('/finalizar-compra', csrfMiddleware, checkAuthenticated, (req, res) => {
-    if (!req.session.cart){
+    if (!req.session.cart) {
         res.redirect('/');
     }
     res.render('finalizar', {csrfToken: req.csrfToken()});
@@ -72,7 +103,7 @@ router.post('/finalizar-compra', csrfMiddleware, checkAuthenticated, (req, res) 
     const shippingAddressCity = req.body.localidade;
     const shippingAddressState = req.body.uf;
     const shippingAddressCountry = 'BRA';
-    const redirectURL = 'https://pt.pornhub.com/'; // xD
+    const redirectURL = 'https://pt.pornhub.com/'; // xD can't redirect to localhost in production anyway
     const maxUses = 1;
     const maxAge = 3000;
 

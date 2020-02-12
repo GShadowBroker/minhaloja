@@ -32,6 +32,7 @@ var profileRouter = require('./routes/profile');
 var dashboardRouter = require('./routes/dashboard');
 var productsRouter = require('./routes/products');
 var cartRouter = require('./routes/shoppingcart');
+var favoritesRouter = require('./routes/favorites');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -79,6 +80,7 @@ app.use(function(req, res, next) { // Allows me to access objects without passin
 	res.locals.session = req.session;
 	res.locals.user = req.user;
 	res.locals.cart = req.session.cart;
+	res.locals.favorites = req.session.favorites;
 	next();
 });
 
@@ -89,6 +91,7 @@ app.use('/minhaconta', profileRouter);
 app.use('/painel-de-controle', dashboardRouter);
 app.use('/produtos', productsRouter);
 app.use('/carrinho', cartRouter);
+app.use('/favoritos', favoritesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

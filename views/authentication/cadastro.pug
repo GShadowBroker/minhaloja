@@ -1,11 +1,11 @@
-extends layout
+extends ../layout
 
 block content
     
     .container
         .row.cadastro-form
             .col-md-3
-            .col-md-6
+            .col-md-6.auth-form.bg-white.shadow-sm
                 h3 Cadastrar em nossa loja é rápido e simples!
                 small(class="text-muted") Se você já tem uma conta, faça o seu login 
                     a(href="/autenticacao/login") aqui.
@@ -42,7 +42,9 @@ block content
                         small(class="form-text text-muted") Insira novamente a sua senha
                     .form-group.form-check
                         input(type="checkbox" name="concordo" class="form-check-input" id="concordo" @click="toggleRegisterButton")
-                        label(for="concordo" class="form-check-label") Li e concordo com os 
+                        label(for="concordo" class="form-check-label") Li e concordo com as 
+                            a(href="#") Políticas de Privacidade 
+                            | e os 
                             a(href="#") Termos de Uso.
                     .form-group
                         input(type="submit" class="btn btn-primary btn-block submit-btn" :class="submitDisabled" value="Cadastrar" disabled)
