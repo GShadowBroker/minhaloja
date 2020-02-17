@@ -17,7 +17,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    res.render('account/carrinho', {cart: req.session.cart});
+    res.render('account/carrinho', {classe:'carrinho', cart: req.session.cart});
 });
 
 router.get('/adicionar-ao-carrinho/:id', (req, res) => {
@@ -28,7 +28,7 @@ router.get('/adicionar-ao-carrinho/:id', (req, res) => {
         .then(product => {
             cart.add(product, product.id);
             req.session.cart = cart;
-            res.redirect(`/produtos/${productId}`);
+            res.redirect(`/carrinho`);
         })
         .catch(err => console.log(err));
 });

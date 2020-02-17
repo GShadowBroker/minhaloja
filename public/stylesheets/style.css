@@ -5,6 +5,7 @@ html {
 
 body {
   overflow-y: hidden;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -38,12 +39,22 @@ body {
   width: 100%;
   height: 100%; }
 
+.overlay {
+  display: block;
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  z-index: -3;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%; }
+
 .hamburger-nav {
   z-index: 10;
   position: fixed;
   left: 0;
   top: 0;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   width: 0px;
   height: 100%;
   background-color: white;
@@ -62,6 +73,20 @@ body {
     height: fit-content;
     width: fit-content;
     padding: 40px; }
+  .wrapper .search-box {
+    display: flex;
+    position: fixed;
+    padding: 40px;
+    visibility: visible;
+    opacity: 1;
+    z-index: 4;
+    background-color: white;
+    min-width: 300px;
+    max-width: 320px;
+    height: fit-content;
+    flex-wrap: wrap;
+    box-shadow: 2px 2px 4px solid black;
+    border-radius: 5px; }
   .wrapper .login-box {
     cursor: pointer;
     position: fixed;
@@ -162,7 +187,8 @@ body {
 
 .content {
   padding-top: 50px;
-  padding-bottom: 260px; }
+  padding-bottom: 260px;
+  /*minha conta*/ }
   .content .products {
     margin-top: 40px;
     background: none; }
@@ -221,6 +247,8 @@ body {
           bottom: 0;
           right: 0;
           padding-bottom: 5px; }
+  .content .search-results h1, .content .search-results h2, .content .search-results h3, .content .search-results h4, .content .search-results h5 {
+    color: #4834d4; }
   .content .product-details {
     background: none;
     border-radius: 5px;
@@ -255,7 +283,16 @@ body {
     padding: 20px; }
     .content .auth-form h3 {
       color: #4834d4; }
+  .content .minha-conta-content {
+    color: #2c3e50; }
+    .content .minha-conta-content h1, .content .minha-conta-content h2, .content .minha-conta-content h3, .content .minha-conta-content h4, .content .minha-conta-content h5 {
+      color: #4834d4; }
 
+/*painel de controle*/
+.painel-content h1, .painel-content h2, .painel-content h3, .painel-content h4, .painel-content h5 {
+  color: #4834d4; }
+
+/*footer*/
 footer {
   position: absolute;
   bottom: 0;
@@ -271,6 +308,9 @@ footer {
 
 .disabled:hover {
   cursor: not-allowed; }
+
+[v-cloak] {
+  display: none; }
 
 .btn-success {
   background-color: #6ab04c;

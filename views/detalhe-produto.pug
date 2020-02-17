@@ -10,8 +10,8 @@ block content
                 span.text-muted (Cód. #{product.id})
                 hr
                 p De: R$ 
-                    strike #{(Math.round((product.price / 0.8) * 100) / 100).toFixed(2).replace('.',',')} 
-                    span.text-success (20% de desconto) 
+                    strike #{(product.price_cents / 100).toFixed(2).replace('.',',')} 
+                    span.text-success (#{product.discount}% de desconto) 
                 |Por Apenas:
                 h2: strong R$ #{(Math.round(product.price * 100) / 100).toFixed(2).toString().replace('.',',')}
                 |Ou até

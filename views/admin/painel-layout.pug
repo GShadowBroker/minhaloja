@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-.col-md-4.menu-painel
+				.list-group
+					a(href="/painel-de-controle/geral" class="list-group-item list-group-item-action" class=(classe === "geral" ? "active" : undefined) id="list-home-list") Geral
+					a(href="/painel-de-controle/adicionar-produto" class="list-group-item list-group-item-action" class=(classe === "produto" ? "active" : undefined) id="list-profile-list") Adicionar Produto
+					a(href="/painel-de-controle/adicionar-fabricante" class="list-group-item list-group-item-action" class=(classe === "fabricante" ? "active" : undefined) id="list-messages-list") Adicionar Fabricante
+					a(href="/painel-de-controle/permissoes" class="list-group-item list-group-item-action" class=(classe === "permissoes" ? "active" : undefined) id="list-settings-list") Gerenciar Permissões
+			
+			.painel-content.col-.col-md-8.mt-4.mt-sm-0.bg-white.border.shadow-sm.rounded.p-4
+				.row
+					.col
+						block painel

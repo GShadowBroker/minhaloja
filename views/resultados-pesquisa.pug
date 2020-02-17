@@ -1,22 +1,16 @@
 extends layout
 
 block content
-	.container
-		.row.sub-banner.bg-white.border.rounded.shadow-sm
-			.col-.col-md-3.subbanner-img
-				img(src="/images/svg/undraw_mobile_web_2g8b.svg" class="img-fluid max-width" alt="Smartphone")
-			.col-.col-md-8.subbanner-text
-				h1.text-dark.text-justify Só aqui você encontra as melhores 
-					span.ofertas-text OFERTAS!
-				hr
-				h3.text-dark.text-justify Compre aqui o seu smartphone com 
-					span.badge.badge-success.frete-subbanner FRETE GRÁTIS 
-					span  em até 
-					span.badge.badge-success.juros-subbanner  12x SEM JUROS!
-
-		.row.products.justify-content-center
-			if products
-				each product in products
+	.container.search-results
+		if results
+			if results.length === 0
+				h3.text-center Sua pesquisa não retornou nenhum resultado.
+			else if results.length === 1
+				h3.text-center Sua pesquisa retornou 1 resultado:
+			else
+				h3.text-center Sua pesquisa retornou #{results.length} resultados:
+			.row.products.justify-content-center
+				each product in results
 					.col-1.col-sm.product.card.m-2.border
 						a(href=product.url class="stretched-link")
 						.product-icons.rounded
@@ -48,3 +42,5 @@ block content
 								strike.text-muted R$ #{(product.price_cents / 100).toFixed(2).replace('.',',')}
 							h4(class="text-success text-center price-tag") R$ #{(Math.round(product.price * 100) / 100).toFixed(2).toString().replace('.',',')}
 	
+		else
+			h3.text-center Sua pesquisa não retornou nenhum resultado.

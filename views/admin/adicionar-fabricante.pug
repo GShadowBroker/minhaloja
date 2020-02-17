@@ -1,0 +1,24 @@
+extends painel-layout
+
+block painel
+    #list-profile
+        h3 Adicionar Fabricante:
+        hr
+        form(action="/painel-de-controle" method="post")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            .errors-product
+                if errors
+                    h4 Por favor, corrija os seguintes erros:
+                    ul(class="list-group")
+                        each error in errors
+                            li(class="list-group-item list-group-item-danger")= error.msg
+                ul(v-if="errors.length > 0" class="list-group")
+                    li(class="list-group-item list-group-item-danger" v-for="error in errors") {{error.message}}
+
+            .form-group
+                label(for="name") Nome do Fabricante
+                input(class="form-control" name="name" id="name" type="text" minlength="2" maxlength="20" autocomplete="off" placeholder="Ex.: Samsung" required)
+            
+            hr
+            .form-group
+                input(type="submit" class="btn btn-primary btn-block" value="Salvar fabricante")

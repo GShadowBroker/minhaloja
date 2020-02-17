@@ -1,92 +1,52 @@
-extends ../layout
+extends conta-layout
 
-block content
-    .container
-        .row
-            .col-.col-md-4
-                ul.list-group
-                    a(href="/minhaconta" class="list-group-item list-group-item-action")
-                        img(src="/images/svg/user.svg" alt="Meus dados" width="20")
-                        span  Meus dados
-                    a(href="/minhaconta/compras" class="list-group-item list-group-item-action")
-                        img(src="/images/svg/pay.svg" alt="Minhas compras" width="20")
-                        span  Minhas compras
-                    a(href="/carrinho" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center active")
-                        .wrapper-menu-cart
-                            img(src="/images/svg/cart.svg" alt="Meu carrinho" width="20")
-                            span  Meu carrinho
-                        if cart
-                            if cart.products.length === 0
-                                span.badge.badge-secondary.badge-pill 0
-                            else
-                                span.badge.badge-secondary.badge-pill= cart.totalQty
-                        else
-                            span.badge.badge-secondary.badge-pill 0
-                    a(href="/favoritos" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center")
-                        .wrapper-menu-cart
-                            img(src="/images/svg/heart.svg" alt="Meus favoritos" width="20")
-                            span  Meus favoritos
-                        if favorites
-                            if favorites.qty === 0
-                                span.badge.badge-secondary.badge-pill 0
-                            else
-                                span.badge.badge-secondary.badge-pill= favorites.qty
-                        else
-                            span.badge.badge-secondary.badge-pill 0
-                    a(href="#" class="list-group-item list-group-item-action")
-                        img(src="/images/svg/password.svg" alt="Privacidade" width="20")
-                        span  Privacidade
-                    a(href="/autenticacao/logout" class="list-group-item list-group-item-action")
-                        img(src="/images/svg/logout.svg" alt="Sair" width="20")
-                        span  Sair
-            .minha-conta-content.col-.col-md-8.mt-4.mt-sm-0
-                .row.border.rounded.d-flex.justify-content-center.bg-white
-                    .carrinho.col-.p-1.p-md-4
-                        if cart
-                            if cart.totalQty === 1
-                                h3 #{cart.totalQty} item em meu carrinho
-                            else
-                                h3 #{cart.totalQty} itens em meu carrinho
-                        else
-                            h3 0 itens em meu carrinho
-                        if cart
-                            table.table.table-responsive.table-carrinho
-                                thead
-                                    tr
-                                        th(scope="col") Produto
-                                        th(scope="col") Quantidade
-                                        th(scope="col") Preço
-                                        th(scope="col") #
-                                tbody
-                                    each product in cart.products
-                                        tr
-                                            td
-                                                .row
-                                                    .col-md-2
-                                                        img(src=product.product.image_path, class="d-none d-md-block", alt=product.product.name width="60")
-                                                    .col-.col-md-10
-                                                        span= product.product.name
-                                                        p.text-muted Cód. #{product.product.id}
-                                            td: span.badge.badge-dark= product.qty
-                                            td= product.price.toFixed(2).toString().replace('.',',')
-                                            td
-                                                .dropdown
-                                                    button(class="btn btn-danger btn-sm dropdown-toggle" type="button" id="dropDownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Excluir
-                                                    div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-                                                        a(class="dropdown-item" href=`/carrinho/remover-do-carrinho/${product.product.id}`) Excluir um
-                                                        a(class="dropdown-item" href=`/carrinho/remover-tudo-do-carrinho/${product.product.id}`) Excluir todos
-                                tfooter
-                                    tr
-                                        td(colspan="4" class="text-right"): h4 Total = R$ #{cart.totalPrice.toFixed(2).toString().replace('.',',')}
-                            .row
-                                .col-md-6.d-none.d-md-block
-                                .col-md-6.col-
-                                    a(href="/carrinho/finalizar-compra" class="finalizar btn btn-success btn-block") Finalizar compra
+block conta
+    .carrinho.col-.p-1.p-md-4
+        if cart
+            if cart.totalQty === 1
+                h3 #{cart.totalQty} item em meu carrinho
+            else
+                h3 #{cart.totalQty} itens em meu carrinho
+        else
+            h3 0 itens em meu carrinho
+        hr
+        if cart
+            table.table.table-responsive.table-carrinho
+                thead
+                    tr
+                        th(scope="col") Produto
+                        th(scope="col") Quantidade
+                        th(scope="col") Preço
+                        th(scope="col") #
+                tbody
+                    each product in cart.products
+                        tr
+                            td
+                                .row
+                                    .col-md-2
+                                        img(src=product.product.image_path, class="d-none d-md-block", alt=product.product.name width="60")
+                                    .col-.col-md-10
+                                        span= product.product.name
+                                        p.text-muted Cód. #{product.product.id}
+                            td: span.badge.badge-dark= product.qty
+                            td= product.price.toFixed(2).toString().replace('.',',')
+                            td
+                                .dropdown
+                                    button(class="btn btn-danger btn-sm dropdown-toggle" type="button" id="dropDownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Excluir
+                                    div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+                                        a(class="dropdown-item" href=`/carrinho/remover-do-carrinho/${product.product.id}`) Excluir um
+                                        a(class="dropdown-item" href=`/carrinho/remover-tudo-do-carrinho/${product.product.id}`) Excluir todos
+                tfooter
+                    tr
+                        td(colspan="4" class="text-right"): h4 Total = R$ #{cart.totalPrice.toFixed(2).toString().replace('.',',')}
+            .row
+                .col-md-6.d-none.d-md-block
+                .col-md-6.col-
+                    a(href="/carrinho/finalizar-compra" class="finalizar btn btn-success btn-block") Finalizar compra
 
-                        else
-                            .row.row-cols-1
-                                .col.d-flex.justify-content-center.pb-3
-                                    img(src="/images/svg/empty_cart.svg", alt="Nenhum item no carrinho" width="280px" class="img-responsive")
-                                .col
-                                    p.text-center Ainda não há itens no seu carrinho.
-                
+        else
+            .row.row-cols-1
+                .col.d-flex.justify-content-center.pb-3
+                    img(src="/images/svg/empty_cart.svg", alt="Nenhum item no carrinho" width="280px" class="img-responsive")
+                .col
+                    p.text-center Ainda não há itens no seu carrinho.

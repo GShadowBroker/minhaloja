@@ -33,6 +33,7 @@ var dashboardRouter = require('./routes/dashboard');
 var productsRouter = require('./routes/products');
 var cartRouter = require('./routes/shoppingcart');
 var favoritesRouter = require('./routes/favorites');
+var apiRouter = require('./routes/api');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -92,6 +93,7 @@ app.use('/painel-de-controle', dashboardRouter);
 app.use('/produtos', productsRouter);
 app.use('/carrinho', cartRouter);
 app.use('/favoritos', favoritesRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

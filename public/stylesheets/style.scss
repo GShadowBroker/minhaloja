@@ -10,6 +10,7 @@ html {
 }
 body {
     overflow-y: hidden;
+    overflow-x: hidden;
 
     margin: 0;
     padding: 0;
@@ -50,13 +51,24 @@ body {
     width: 100%;
     height: 100%;
 }
+.overlay {
+    display: block;
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -3;
+
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+}
 
 .hamburger-nav {
     z-index: 10;
     position: fixed;
     left:0;
     top:0;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 
     width: 0px;
     height: 100%;
@@ -83,6 +95,29 @@ body {
         padding: 40px;
     }
     
+    .search-box {
+        display: flex;
+
+        position: fixed;
+        padding: 40px;
+
+        // visibility: hidden;
+        // opacity: 0;
+        // z-index: -4;
+        visibility: visible;
+        opacity: 1;
+        z-index: 4;
+
+        background-color: white;
+        min-width: 300px;
+        max-width: 320px;
+        height: fit-content;
+        flex-wrap: wrap;
+
+        box-shadow: 2px 2px 4px solid black;
+        border-radius: 5px;
+    }
+
     .login-box {
         cursor: pointer;
         position: fixed;
@@ -308,6 +343,13 @@ body {
             }
         }
     }
+
+    .search-results {
+        h1, h2, h3, h4, h5 {
+            color: #4834d4;
+        }
+    }
+
     .product-details {
         background: none;
         border-radius: 5px;
@@ -357,8 +399,26 @@ body {
             color: #4834d4;
         }
     }
+
+    /*minha conta*/
+
+    .minha-conta-content {
+        color: #2c3e50;
+        h1, h2, h3, h4, h5 {
+            color: #4834d4;
+        }
+    }
 }
 
+/*painel de controle*/
+
+.painel-content {
+    h1,h2,h3,h4,h5 {
+        color:#4834d4;
+    }
+}
+
+/*footer*/
 footer {
     position: absolute;
     bottom: 0;
@@ -378,6 +438,10 @@ footer {
     &:hover {
         cursor: not-allowed;
     }
+}
+
+[v-cloak] {
+    display: none;
 }
 
 // BOOTSTRAP OVERWRITES

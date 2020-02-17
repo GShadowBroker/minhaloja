@@ -1,0 +1,66 @@
+extends painel-layout
+
+block painel
+    #list-profile
+        h3 Adicionar Produto:
+        hr
+        form(action="/painel-de-controle" method="post")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            .errors-product
+                if errors
+                    h4 Por favor, corrija os seguintes erros:
+                    ul(class="list-group")
+                        each error in errors
+                            li(class="list-group-item list-group-item-danger")= error.msg
+                ul(v-if="errors.length > 0" class="list-group")
+                    li(class="list-group-item list-group-item-danger" v-for="error in errors") {{error.message}}
+
+            .form-group
+                label(for="name") Nome do produto
+                input(class="form-control" name="name" id="name" type="text" minlength="2" maxlength="55" autocomplete="off" placeholder="Ex.: Samsung Galaxy S10" required)
+            
+            .form-group
+                label(for="manufacturerId") Fabricante
+                select(class="custom-select" name="manufacturerId" id="manufacturerId" required)
+                    option(value="") Nenhum fabricante selecionado
+                    if manufacturersList
+                        each manufacturer in manufacturersList
+                            option(value=manufacturer.id)= manufacturer.name
+            .form-group
+                label(for="image") Caminho da Imagem
+                input(class="form-control-file" name="image_path" id="image" type="file" required)
+                small(class="form-text text-muted") Atenção: Escolha o caminho onde a imagem já está salva em definitivo. Você deve mover a imagem ao caminho antes.
+            .form-group
+                label(for="price") Preço em Reais
+                .input-group.mb-2
+                    .input-group-prepend
+                        .input-group-text R$
+                    input(class="form-control" name="price" id="price" type="number" step="0.01" placeholder="Ex.: 39,90" required)
+                small(class="form-text text-muted") Preço unitário em Reais (R$)
+            .form-group
+                .row
+                    .col-4
+                        label(for="discount") Disconto
+                        .input-group.mb-2
+                            input(class="form-control" name="discount" id="discount" type="number" step="1" placeholder="Ex.: 25" required)
+                            .input-group-append
+                                .input-group-text %
+                        small(class="form-text text-muted") Disconto em (%)
+            .form-group
+                label(for="os") Sistema Operacional
+                input(class="form-control" name="os" id="os" type="text" minlength="2" maxlength="55" placeholder="Ex.: Android 10" required)
+            .form-group
+                label(for="color") Cor
+                input(class="form-control" name="color" id="color" type="text" minlength="2" maxlength="55" placeholder="Ex.: Preto" required)
+            .form-group
+                label(for="displaySize") Tamanho da Tela
+                input(class="form-control" name="displaySize" id="displaySize" type="text" minlength="2" maxlength="55" placeholder="Ex.: 6.1\"" required)
+            .form-group
+                label(for="cpu") Processador
+                input(class="form-control" name="cpu" id="cpu" type="text" minlength="2" maxlength="55" placeholder="Ex.: 8 core 2.2 GHZ" required)
+            .form-group
+                label(for="ram") Memória RAM
+                input(class="form-control" name="ram" id="ram" type="text" minlength="2" maxlength="55" placeholder="Ex.: 8 GB" required)
+            hr
+            .form-group
+                input(type="submit" class="btn btn-primary btn-block" value="Salvar produto")

@@ -12,11 +12,26 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    discount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: true,
+      validate: {
+        isNumeric: {
+          msg: 'O valor do disconto deve ser numérico'
+        },
+        isInt: {
+          msg: 'O valor do disconto deve ser um número inteiro'
+        },
+        min: 0,
+        max: 100,
+      }
+    },
     price_cents: {type: DataTypes.INTEGER, allowNull: false},
     price: {
-      type: DataTypes.VIRTUAL(DataTypes.DECIMAL(10,2), ['price_cents']),
+      type: DataTypes.VIRTUAL(DataTypes.DECIMAL(10,2), ['price_cents', 'discount']),
       get: function(){
-        return parseFloat(this.get('price_cents')/100);
+        return parseFloat((this.get('price_cents')/100) * ((100 - this.get('discount')) / 100));
       }
     },
     os: DataTypes.STRING,

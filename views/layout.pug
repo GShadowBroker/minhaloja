@@ -13,28 +13,35 @@ html(lang="pt-BR")
 		title Loja
 	body
 		.blur-overlay
+		.overlay
 		.hamburger-nav
 			button(type="button" class="close" aria-label="Close" onclick="closeNav()")
 				span(aria-hidden="true") &times;
 			.menu-hamburger.list-group.list-group-flush
-				a(href='/' class="list-group-item list-group-item-action text-nowrap")
-					img(src="/images/svg/sydney-opera-house.svg", alt="Home" width=20)
-					span  Home
-				a(href='#' class="list-group-item list-group-item-action text-nowrap")
-					img(src="/images/svg/apple.svg", alt="Apple" width=20)
-					span  Apple
-				a(href='#' class="list-group-item list-group-item-action text-nowrap")
-					img(src="/images/svg/lg.svg", alt="LG" width=20)
-					span  LG
-				a(href='#' class="list-group-item list-group-item-action text-nowrap")
-					img(src="/images/svg/motorola.svg", alt="Motorola" width=20)
-					span  Motorola
-				a(href='#' class="list-group-item list-group-item-action text-nowrap")
-					img(src="/images/svg/samsung.svg", alt="Samsung" width=20)
-					span  Samsung
-				a(href='#' class="list-group-item list-group-item-action text-nowrap")
-					img(src="/images/svg/xiaomi.svg", alt="Xiaomi" width=20)
-					span  Xiaomi
+				form(method='get' action='/pesquisar' class="p-2")
+					.input-group
+						input.form-control.search-form(type='text' placeholder='Procurar' class="bg-white border" name="name")
+						.input-group-append
+							button.btn.btn-light.bg-none(type='submit')
+								img(src="/images/svg/search.svg", alt="Procurar" width="20")
+			a(href='/' class="list-group-item list-group-item-action text-nowrap")
+				img(src="/images/svg/sydney-opera-house.svg", alt="Home" width=20)
+				span  Home
+			a(href='/produtos/fabricantes/apple' class="list-group-item list-group-item-action text-nowrap")
+				img(src="/images/svg/apple.svg", alt="Apple" width=20)
+				span  Apple
+			a(href='/produtos/fabricantes/lg' class="list-group-item list-group-item-action text-nowrap")
+				img(src="/images/svg/lg.svg", alt="LG" width=20)
+				span  LG
+			a(href='/produtos/fabricantes/motorola' class="list-group-item list-group-item-action text-nowrap")
+				img(src="/images/svg/motorola.svg", alt="Motorola" width=20)
+				span  Motorola
+			a(href='/produtos/fabricantes/samsung' class="list-group-item list-group-item-action text-nowrap")
+				img(src="/images/svg/samsung.svg", alt="Samsung" width=20)
+				span  Samsung
+			a(href='/produtos/fabricantes/xiaomi' class="list-group-item list-group-item-action text-nowrap")
+				img(src="/images/svg/xiaomi.svg", alt="Xiaomi" width=20)
+				span  Xiaomi
 		.wrapper#root
 			.loading
 				div(class="spinner-grow" role="status")
@@ -55,7 +62,7 @@ html(lang="pt-BR")
 										li Ol&aacute;, #{user.usuario}!
 										if user.isAdmin
 											li
-												a(href='/painel-de-controle') Painel de controle
+												a(href='/painel-de-controle/geral') Painel de controle
 										li
 											a(href='/minhaconta') Minha conta
 										li
@@ -76,23 +83,23 @@ html(lang="pt-BR")
 								li
 									a(href='/') HOME
 								li
-									a(href='#') Apple
+									a(href='/produtos/fabricantes/apple') Apple
 								li
-									a(href='#') LG
+									a(href='/produtos/fabricantes/lg') LG
 								li
-									a(href='#') Motorola
+									a(href='/produtos/fabricantes/motorola') Motorola
 								li
-									a(href='#') Samsung
+									a(href='/produtos/fabricantes/samsung') Samsung
 								li
-									a(href='#') Xiaomi
+									a(href='/produtos/fabricantes/xiaomi') Xiaomi
 						.nav-left.nav-section.col-sm-4.d-flex.d-lg-none.col-2
 							.nav-icon.dropdown
 								a(title="Menu" class="hamburger-btn" @click="openNav")
 									img(src="/images/svg/menu.svg", alt="Menu" width=40)
 						.nav-center.nav-section.col-sm-4.col-lg-4.d-none.d-sm-flex
-							form(method='get' action='')
+							form(method='get' action='/pesquisar' @keyup='handleSearchBox($event)')
 								.input-group
-									input.form-control.search-form(type='text' placeholder='Procurar produto')
+									input.form-control.search-form(v-model="searchInput" type='text' placeholder='Procurar produto' name='name' autocomplete="off")
 									.input-group-append
 										button.btn.btn-light.bg-none(type='submit')
 											img(src="/images/svg/search.svg", alt="Procurar" width="20")
@@ -111,6 +118,15 @@ html(lang="pt-BR")
 										span.badge.badge-light= cart.totalQty
 									else
 										span.badge.badge-light 0
+			.search-box(v-show="searchProducts[0]" v-cloak)
+				.container-fluid
+					.row
+						.col-
+							ul.list-group.list-group-flush(v-for="product in searchProducts")
+								li.list-group-item.list-group-item-action
+									a.stretched-link(:href="product.url")
+									img(:src="product.image_path" :alt="product.name" width="20")
+									span(v-cloak)  {{product.name}}
 			.login-box
 				.login-arrow
 				.login-innerbox
@@ -118,7 +134,7 @@ html(lang="pt-BR")
 						ul.list-group.menu-conta
 							span.list-group-item: strong.text-center Ol&aacute;, #{user.usuario}!
 							if user.isAdmin
-								a(href='/painel-de-controle' class="list-group-item list-group-item-action")
+								a(href='/painel-de-controle/geral' class="list-group-item list-group-item-action")
 									img(src="/images/svg/process.svg", alt="Painel administrativo" width=20)
 									span  Painel de controle
 							a(href='/minhaconta' class="list-group-item list-group-item-action")
@@ -142,6 +158,7 @@ html(lang="pt-BR")
 			footer
 				| &copy;2020 - Minha Loja
 	
+		script(src="https://unpkg.com/axios/dist/axios.min.js")
 		script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
 		script(src="/javascripts/script.js")
 		block javascript

@@ -8,7 +8,7 @@ const checkAuthenticated = require('./login_redirects/checkAuthenticated');
 const router = express.Router();
 
 router.get('/', checkAuthenticated, (req, res) => {
-    res.render('account/favoritos');
+    res.render('account/favoritos', {classe:'favoritos'});
 });
 
 router.get('/adicionar-aos-favoritos/:id', checkAuthenticated, (req, res) => {
@@ -20,7 +20,7 @@ router.get('/adicionar-aos-favoritos/:id', checkAuthenticated, (req, res) => {
             favorites.add(product, product.id);
             req.session.favorites = favorites;
 
-            return res.redirect(`/produtos/${productId}`);
+            return res.redirect(`/favoritos`);
         })
         .catch(err => console.log(err));
 });
