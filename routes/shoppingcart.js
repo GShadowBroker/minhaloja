@@ -1,12 +1,13 @@
 'use strict';
 
+const dotenv = require('dotenv').config();
 const express = require('express');
 const checkAuthenticated = require('./login_redirects/checkAuthenticated');
 const products = require('../models').products;
 const Cart = require('../models/Virtual models/cart');
 const Favorites = require('../models/Virtual models/favorites');
 const axios = require('axios').default;
-var parseString = require('xml2js').parseString;
+const parseString = require('xml2js').parseString;
 
 const csurf = require('csurf');
 const csrfMiddleware = csurf({
@@ -85,8 +86,8 @@ router.get('/finalizar-compra', csrfMiddleware, checkAuthenticated, (req, res) =
 
 router.post('/finalizar-compra', csrfMiddleware, checkAuthenticated, (req, res) => {
 
-    const email = 'gledysonferreira@gmail.com';
-    const token = '8EE04F9C30CA4EAA9B940ACD0B837353';
+    const email = process.env.MY_EMAIL;
+    const token = process.env.PAGSEGURO_TOKEN;
 
     const currency = 'BRL';
     const senderName = req.body.nome_completo;
@@ -103,7 +104,7 @@ router.post('/finalizar-compra', csrfMiddleware, checkAuthenticated, (req, res) 
     const shippingAddressCity = req.body.localidade;
     const shippingAddressState = req.body.uf;
     const shippingAddressCountry = 'BRA';
-    const redirectURL = 'https://pt.pornhub.com/'; // xD can't redirect to localhost in production anyway
+    const redirectURL = 'https://www.minhaloja.com.br/minhaconta/minhascompras'; // PLACEHOLDER! Change in production.
     const maxUses = 1;
     const maxAge = 3000;
 

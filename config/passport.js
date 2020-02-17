@@ -139,11 +139,9 @@ module.exports = function (passport) {
         Auth.findByPk(id).then(function (user) {
 
             if (user) {
-                console.log('DESERIALIZING!!!!!!!!!!!!!!');
                 done(null, user.get());
 
             } else {
-                console.log('ERROR!!!!!!!!!!!!!!');
                 done(user.errors, null);
 
             }
