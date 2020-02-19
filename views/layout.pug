@@ -56,7 +56,7 @@ html(lang="pt-BR")
 						.row
 							.col-5.loja-title
 								h1 Minha Loja
-							.col-7.menu-conta
+							.col-7.menu-conta.d-flex.justify-content-end
 								if user
 									ul.menu-conta
 										li Ol&aacute;, #{user.usuario}!
@@ -107,13 +107,13 @@ html(lang="pt-BR")
 						.nav-right.nav-section.col-sm-4.col-lg-4.col-10
 							.nav-icon.px-1.px-md-2
 								a(href="#" title="Entrar" class="login-button")
-									img(src="/images/svg/user.svg", alt="Entrar" width=40)
+									img(src="/images/svg/user-white.svg", alt="Entrar" width=40)
 							.nav-icon.px-1.px-md-2
 								a(href="/favoritos" title="Meus favoritos")
-									img(src="/images/svg/heart.svg", alt="Meus favoritos" width=40)
+									img(src="/images/svg/heart-white.svg", alt="Meus favoritos" width=40)
 							.nav-icon.px-1.px-md-2
 								a(href="/carrinho" title="Meu carrinho de compras")
-									img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=42)
+									img(src="/images/svg/cart-white.svg", alt="Carrinho de compras" width=42)
 									if cart
 										span.badge.badge-light= cart.totalQty
 									else

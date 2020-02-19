@@ -1,10 +1,9 @@
 extends layout
 
 block content
-    .container-fluid
+    .container
         .row.finalizar-form
-            .col-md-5.d-none.d-sm-block
-                .col-2
+            .col-md-5.d-none.d-md-block
                 .col-10.lista-produtos-finalizar
                     if cart
                         table.table
@@ -25,7 +24,7 @@ block content
                                 tr
                                     td(colspan="3") Total = R$ #{cart.totalPrice.toFixed(2).toString().replace('.',',')}
 
-            .col-md-5.auth-form.bg-white.shadow-sm
+            .col-md-7.auth-form.bg-white.shadow-sm
                 h3 Precisamos de alguns dados antes de concluir a sua compra
                 hr
                 form(action="/carrinho/finalizar-compra" method="post")
@@ -41,11 +40,11 @@ block content
                     h3 Comprador:
                     .form-group
                         label(for="nome_completo") Nome completo
-                        input(class="form-control" name="nome_completo" id="nome_completo" type="text" minlength="2" maxlength="100" required)
+                        input(class="form-control" name="nome_completo" id="nome_completo" value=user.nome_completo type="text" minlength="2" maxlength="100" required)
                         small(class="form-text text-muted") Nome e sobrenome
                     .form-group
                         label(for="cpf") CPF
-                        input(class="form-control" name="cpf" id="cpf" type="text" minlength="11" required)
+                        input(class="form-control" name="cpf" id="cpf" type="text" value=user.cpf maxlength="11" size="11" required)
                         small(class="form-text text-muted") Insira apenas números
                     hr
                     h3 Endereço:
@@ -53,7 +52,7 @@ block content
                         .col-6
                             .form-group
                                 label(for="cep") CEP
-                                input(class="form-control" name="cep" id="cep" type="text" minlength="8" required)
+                                input(class="form-control" name="cep" id="cep" type="text" value=user.cep minlength="7" maxlength="10" required)
                                 small(class="form-text text-muted") Insira apenas números
                         .col-6
                             .form-group
@@ -90,36 +89,40 @@ block content
 
                     .form-group
                         label(for="localidade") Cidade
-                        input(class="form-control" name="localidade" id="localidade" type="text" minlength="2" maxlength="55" required)
+                        input(class="form-control" name="localidade" id="localidade" type="text" value=user.localidade minlength="2" maxlength="55" required)
                     .row
                         .col-10
                             .form-group
                                 label(for="logradouro") Rua
-                                input(class="form-control" name="logradouro" id="logradouro" type="text" minlength="2" maxlength="100")
+                                input(class="form-control" name="logradouro" id="logradouro" type="text" value=user.logradouro minlength="2" maxlength="100")
                         .col-2
                             .form-group
                                 label(for="numero") Número
                                 input(class="form-control" name="numero" id="numero" type="text" maxlength="8")
                     .form-group
                         label(for="bairro") Bairro
-                        input(class="form-control" name="bairro" id="bairro" type="text" minlength="2" maxlength="55" required)
+                        input(class="form-control" name="bairro" id="bairro" type="text" value=user.bairro minlength="2" maxlength="55" required)
                     .form-group
                         label(for="complemento") Complemento
-                        input(class="form-control" name="complemento" id="complemento" type="text" maxlength="55")
+                        input(class="form-control" name="complemento" id="complemento" type="text" value=user.complemento maxlength="55")
                     .row
                         .col-2
                             .form-group
                                 label(for="codigo_de_area") Área
-                                input(class="form-control" name="codigo_de_area" id="codigo_de_area" type="tel" maxlength="2" placeholder="(XX)")
+                                if user.telefone
+                                    input(class="form-control" name="codigo_de_area" id="codigo_de_area" type="tel" value=user.telefone.slice(0,2) maxlength="2" placeholder="(XX)")
+                                else
+                                    input(class="form-control" name="codigo_de_area" id="codigo_de_area" type="tel" placeholder="(XX)")
                         .col-10
                             .form-group
                                 label(for="telefone") Telefone
-                                input(class="form-control" name="telefone" id="telefone" type="tel" maxlength="55" placeholder="XXXX-XXXX")
-                    
+                                if user.telefone
+                                    input(class="form-control" name="telefone" id="telefone" type="tel" value=user.telefone.slice(2,user.telefone.length) maxlength="55" placeholder="XXXX-XXXX")
+                                else
+                                    input(class="form-control" name="telefone" id="telefone" type="tel" maxlength="55" placeholder="XXXX-XXXX")
                     hr
                     .form-group.form-check
                         input(type="checkbox" name="concordo" class="form-check-input" id="concordo" @click="toggleRegisterButton")
                         label(for="concordo" class="form-check-label") Declaro que estes são os meus dados e estou sujeito a paulada caso fornecidos incorretamente.
                     .form-group
                         input(type="submit" class="btn btn-success btn-block submit-btn" :class="submitDisabled" value="Confirmar compra" disabled)
-            .col-md-2

@@ -154,9 +154,9 @@ body {
 }
 
 .header {
-    background: none;
+    background: #30336b;
     h1 {
-        color: #4834d4;
+        color: white;
         font-weight: 900;
         letter-spacing: 10px;
     }
@@ -171,6 +171,21 @@ body {
             li {
                 display: inline;
                 padding: 0px 10px 0px 10px;
+                color: white;
+
+                a {
+                    overflow: hidden;
+                    text-decoration: none;
+                    border-top: 2px solid #30336b;
+                    color: #dbdbf1;
+                    padding: 8px;
+                    transition: all 0.3s;
+
+                    &:hover {
+                        text-orientation: sideways-right;
+                        border-top: 2px solid #686de0;
+                    }
+                }
             }
         }
     }
@@ -183,7 +198,7 @@ body {
     position: sticky;
     top:0;
     z-index: 3;
-    background-color: #4834d4;
+    background-color: #130f40;
     padding: 15px;
     .container {
         .nav-section {
@@ -425,7 +440,7 @@ footer {
     left: 0;
     height: 200px; //height of the footer
     width: 100%;
-    background-color: #4834d4;
+    background-color: #130f40;
     display: flex;
     align-items: center;
     justify-content: center;

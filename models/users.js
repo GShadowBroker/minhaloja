@@ -87,7 +87,7 @@ module.exports = (sequelize, DataTypes) => {
     telefone: {
       type: DataTypes.STRING,
       validate: {
-        isNumber: {
+        isNumeric: {
           msg:'O número de telefone não deve conter caractéres não numéricos.'
         }
       }
