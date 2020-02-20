@@ -6,10 +6,9 @@
   },
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "SET NODE_ENV=production & node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "launch": "SET DEBUG=minhaloja:* & npm run dev",
-    "vai": "SET NODE_ENV=production & npm run start"
+    "launch": "SET DEBUG=minhaloja:* & npm run dev"
   },
   "dependencies": {
     "axios": "^0.19.2",
