@@ -5,11 +5,20 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const db = {};
-const dotenv = require('dotenv').config({path:'../.env'});
 
-const DATABASE_URL = `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:5432/${process.env.DB_NAME}`;
+if (process.env.NODE_ENV !== 'production') {
+  
+  let dotenv = require('dotenv').config({path:'../.env'});
 
-let sequelize = new Sequelize(DATABASE_URL);
+  let DATABASE_URL = `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:5432/${process.env.DB_NAME}`;
+
+  var sequelize = new Sequelize(DATABASE_URL);
+
+} else {
+
+  var sequelize = new Sequelize(process.env.DATABASE_URL);
+
+}
 
 fs
   .readdirSync(__dirname)
