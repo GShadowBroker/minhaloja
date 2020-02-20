@@ -9,7 +9,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "launch": "SET DEBUG=minhaloja:* & npm run dev",
-    "vai": "SET NODE_ENV=production & npm run dev"
+    "vai": "SET NODE_ENV=production & npm run start"
   },
   "dependencies": {
     "axios": "^0.19.2",

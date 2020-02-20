@@ -1,5 +1,5 @@
 var express = require('express');
-var dotenv = require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 var createError = require('http-errors');
 var path = require('path');
 var csurf = require('csurf');
