@@ -7,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 
+var helmet = require('helmet');
+var compression = require('compression');
+
 var app = express();
 
 const csrfMiddleware = csurf({
@@ -22,18 +25,19 @@ var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 var init = require('./config/passport-config');
 init(passport);
-// var init = require('./config/passport');
-// init(passport)
 
 var indexRouter = require('./routes/index');
 var authenticationRouter = require('./routes/authentication');
-var usersRouter = require('./routes/tests'); // REMOVE IN PRODUCTION!
+// var usersRouter = require('./routes/tests'); // REMOVE IN PRODUCTION!
 var profileRouter = require('./routes/profile');
 var dashboardRouter = require('./routes/dashboard');
 var productsRouter = require('./routes/products');
 var cartRouter = require('./routes/shoppingcart');
 var favoritesRouter = require('./routes/favorites');
 var apiRouter = require('./routes/api');
+
+app.use(helmet());
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -87,7 +91,7 @@ app.use(function(req, res, next) { // Allows me to access objects without passin
 
 app.use('/', indexRouter);
 app.use('/autenticacao', authenticationRouter);
-app.use('/testes', usersRouter); // REMOVE IN PRODUCTION!
+// app.use('/testes', usersRouter); // REMOVE IN PRODUCTION!
 app.use('/minhaconta', profileRouter);
 app.use('/painel-de-controle', dashboardRouter);
 app.use('/produtos', productsRouter);

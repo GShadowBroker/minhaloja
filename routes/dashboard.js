@@ -119,7 +119,6 @@ router.post('/adicionar-produto', checkAuthenticated, csrfMiddleware, checkAdmin
                     manufacturerId: req.body.manufacturerId
                 })
                     .then(product => {
-                        console.log(product);
                         res.render('admin/adicionar-produto', {classe:'produto', alert:'Produto criado com sucesso!', csrfToken: req.csrfToken()});
                     })
                     .catch(err => console.log(err));

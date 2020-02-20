@@ -97,9 +97,9 @@ html(lang="pt-BR")
 								a(title="Menu" class="hamburger-btn" @click="openNav")
 									img(src="/images/svg/menu.svg", alt="Menu" width=40)
 						.nav-center.nav-section.col-sm-4.col-lg-4.d-none.d-sm-flex
-							form(method='get' action='/pesquisar' @keyup='handleSearchBox($event)')
+							form(method='get' action='/pesquisar')
 								.input-group
-									input.form-control.search-form(v-model="searchInput" type='text' placeholder='Procurar produto' name='name' autocomplete="off")
+									input.form-control.search-form(type='text' placeholder='Procurar produto' name='name' autocomplete="off")
 									.input-group-append
 										button.btn.btn-light.bg-none(type='submit')
 											img(src="/images/svg/search.svg", alt="Procurar" width="20")

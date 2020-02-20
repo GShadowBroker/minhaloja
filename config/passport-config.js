@@ -11,11 +11,9 @@ module.exports = function init(passport) {
             users.findOne({where:{usuario:username}})
                 .then(user => {
                     if (!user){
-                        console.log('incorrect username');
                         return done(null, false, {message:'Usuário incorreto!'});
                     }
                     if (!bcrypt.compareSync(password, user.senha)){
-                        console.log('incorrect password');
                         return done(null, false, {message:'Senha incorreta!'});
                     }
                     users.update({
