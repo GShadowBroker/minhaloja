@@ -6,6 +6,8 @@ block painel
         hr
         form(action="/painel-de-controle" method="post")
             input(type="hidden" name="_csrf" value=csrfToken)
+            if alert
+                span.list-group-item.list-group-item-success.text-center= alert
             .errors-product
                 if errors
                     h4 Por favor, corrija os seguintes erros:

@@ -4,8 +4,10 @@ block painel
     #list-profile
         h3 Adicionar Fabricante:
         hr
-        form(action="/painel-de-controle" method="post")
+        form(action="/painel-de-controle/adicionar-fabricante" method="post")
             input(type="hidden" name="_csrf" value=csrfToken)
+            if alert
+                span.list-group-item.list-group-item-success.text-center= alert
             .errors-product
                 if errors
                     h4 Por favor, corrija os seguintes erros:

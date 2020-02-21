@@ -25,6 +25,8 @@ router.get('/adicionar-fabricante', checkAuthenticated, csrfMiddleware, checkAdm
 router.post('/adicionar-fabricante', checkAuthenticated, csrfMiddleware, checkAdmin, (req, res) => {
     let { name } = req.body;
 
+    let errors = [];
+
     if (!name){
         errors.push({msg:'Nome do fabricante é obrigatório.'});
     }
@@ -40,6 +42,7 @@ router.post('/adicionar-fabricante', checkAuthenticated, csrfMiddleware, checkAd
         name: req.body.name
     })
         .then(() => {
+            req.flash('alert', 'Fabricante salvo com sucesso!');
             res.render('admin/adicionar-fabricante', {classe:'fabricante', alert: 'Fabricante criado com sucesso', csrfToken: req.csrfToken()});
         })
         .catch(err => console.log(err));
@@ -119,7 +122,8 @@ router.post('/adicionar-produto', checkAuthenticated, csrfMiddleware, checkAdmin
                     manufacturerId: req.body.manufacturerId
                 })
                     .then(product => {
-                        res.render('admin/adicionar-produto', {classe:'produto', alert:'Produto criado com sucesso!', csrfToken: req.csrfToken()});
+                        req.flash('alert', 'Produto salvo com sucesso!');
+                        res.render('admin/adicionar-produto', {classe:'produto', csrfToken: req.csrfToken()});
                     })
                     .catch(err => console.log(err));
             })
