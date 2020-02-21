@@ -108,7 +108,7 @@ router.post('/adicionar-produto', checkAuthenticated, csrfMiddleware, checkAdmin
             .then(manufacturer => {
                 products.create({
                     name: req.body.name,
-                    image_path: `/images/produtos/${manufacturer.name}/${req.body.image_path}`,
+                    image_path: `/images/produtos/${manufacturer.name.toLowerCase()}/${req.body.image_path}`,
                     discount: req.body.discount,
                     price_cents: req.body.price * 100,
                     os: req.body.os,
