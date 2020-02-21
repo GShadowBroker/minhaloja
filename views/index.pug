@@ -23,10 +23,10 @@ block content
 							if cart
 								if product.id in cart.products
 									a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` title="Adicionar mais ao carrinho" class="carrinho-product p-2 rounded-left")
-										img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=25)
+										img(src="public/images/svg/cart.svg", alt="Carrinho de compras" width=25)
 								else
 									a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` title="Adicionar ao meu carrinho" class="carrinho-product p-2 rounded-left")
-										img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=25)
+										img(src="public/images/svg/cart.svg", alt="Carrinho de compras" width=25)
 							else
 								a(href=`/carrinho/adicionar-ao-carrinho/${product.id}` title="Adicionar ao meu carrinho" class="carrinho-product p-2 rounded-left")
 									img(src="/images/svg/cart.svg", alt="Carrinho de compras" width=25)
