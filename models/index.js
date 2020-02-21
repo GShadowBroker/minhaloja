@@ -9,20 +9,6 @@ const env = process.env.NODE_ENV || 'development';
 const db = {};
 
 const credentials = {
-  development: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: "127.0.0.1",
-    dialect: "postgres"
-  },
-  test: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: "127.0.0.1",
-    dialect: "postgres"
-  },
   production: {
     dialect: "postgres",
     use_env_variable: "DATABASE_URL"
@@ -32,16 +18,9 @@ const credentials = {
 console.log(process.env.NODE_ENV);
 console.log(`process.env.NODE_ENV == 'production': ${process.env.NODE_ENV == 'production'}`);
 
-if (process.env.NODE_ENV !== 'production'){
-  var config = credentials.development;
 
-  
-	console.log(`IT'S DVVVVVVVVVVVVVVVVVVVVVVVVVVVVELPMENT TIME! :(`);
-} else {
-  var config = credentials.production;
-  
-	console.log(`IT'S PRRRRRRRRRRRRRRRRRRDUCTION TIME!`);
-}
+var config = credentials.production;
+
 
 console.log(`WE ARE IN ${process.env.NODE_ENV} mode!\config: ${config}\nconfig.use_env_variable: ${config.use_env_variable}`);
 
