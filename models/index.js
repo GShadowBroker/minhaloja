@@ -8,8 +8,6 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const db = {};
 
-console.log(`WE ARE IN ${process.env.NODE_ENV} mode!`);
-
 const credentials = {
   "development": {
     "username": process.env.DB_USERNAME,
@@ -32,6 +30,10 @@ const credentials = {
 };
 
 const config = credentials[env];
+
+console.log(`WE ARE IN ${process.env.NODE_ENV} mode!\nENV: ${process.env.NODE_ENV}`);
+console.log(config);
+console.log(config[env]);
 
 let sequelize;
 if (config.use_env_variable) {
