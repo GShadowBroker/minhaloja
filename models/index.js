@@ -9,31 +9,33 @@ const env = process.env.NODE_ENV || 'development';
 const db = {};
 
 const credentials = {
-  "development": {
-    "username": process.env.DB_USERNAME,
-    "password": process.env.DB_PASSWORD,
-    "database": process.env.DB_NAME,
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+  development: {
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    host: "127.0.0.1",
+    dialect: "postgres"
   },
-  "test": {
-    "username": process.env.DB_USERNAME,
-    "password": process.env.DB_PASSWORD,
-    "database": process.env.DB_NAME,
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+  test: {
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    host: "127.0.0.1",
+    dialect: "postgres"
   },
-  "production": {
-    "dialect": "postgres",
-    "use_env_variable": "DATABASE_URL"
+  production: {
+    dialect: "postgres",
+    use_env_variable: "DATABASE_URL"
   }
 };
 
-const config = credentials[env];
+if (process.env.NODE_ENV !== 'production'){
+  var config = credentials.development;
+} else {
+  var config = credentials.production;
+}
 
-console.log(`WE ARE IN ${process.env.NODE_ENV} mode!\nENV: ${process.env.NODE_ENV}`);
-console.log(config);
-console.log(config[env]);
+console.log(`WE ARE IN ${process.env.NODE_ENV} mode!\config: ${config}\nconfig.use_env_variable: ${config.use_env_variable}`);
 
 let sequelize;
 if (config.use_env_variable) {
