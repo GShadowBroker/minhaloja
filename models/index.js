@@ -1,6 +1,6 @@
 'use strict';
 
-const dotenv = require('dotenv').config({path:'../.env'});
+if (process.env.NODE_ENV !== 'production') require('dotenv').config({path:'../.env'});
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');

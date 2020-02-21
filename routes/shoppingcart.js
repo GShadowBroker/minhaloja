@@ -1,6 +1,6 @@
 'use strict';
 
-const dotenv = require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const express = require('express');
 const checkAuthenticated = require('./login_redirects/checkAuthenticated');
 const products = require('../models').products;
