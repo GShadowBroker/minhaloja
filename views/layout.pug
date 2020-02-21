@@ -118,15 +118,6 @@ html(lang="pt-BR")
 										span.badge.badge-light= cart.totalQty
 									else
 										span.badge.badge-light 0
-			.search-box(v-show="searchProducts[0]" v-cloak)
-				.container-fluid
-					.row
-						.col-
-							ul.list-group.list-group-flush(v-for="product in searchProducts")
-								li.list-group-item.list-group-item-action
-									a.stretched-link(:href="product.url")
-									img(:src="product.image_path" :alt="product.name" width="20")
-									span(v-cloak)  {{product.name}}
 			.login-box
 				.login-arrow
 				.login-innerbox

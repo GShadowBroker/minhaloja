@@ -4,7 +4,7 @@ block content
     .container.bg-white.border.rounded.shadow-sm
         .row.product-details.text-right
             .col-.col-sm-5.product-image
-                img(src=product.image_path, class="img-responsive", alt=product.name, width="100%")
+                img(src=product.image_path.toLowerCase(), class="img-responsive", alt=product.name, width="100%")
             .col-.col-sm-7.product-card
                 h1= product.name
                 span.text-muted (Cód. #{product.id})

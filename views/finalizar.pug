@@ -16,7 +16,7 @@ block content
                                 each product in cart.products
                                     tr
                                         td
-                                            img(src=product.product.image_path width="40")
+                                            img(src=product.product.image_path.toLowerCase() width="40")
                                             span  #{product.product.name}
                                         td: span.badge.badge-dark= product.qty
                                         td= product.product.price

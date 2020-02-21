@@ -10,7 +10,7 @@ block conta
                     li.list-group-item.d-flex.align-items-center.justify-content-between
                         .col-10
                             a(href=product.url class="stretched-link")
-                            img(src=product.image_path alt=product.name width="20")
+                            img(src=product.image_path.toLowerCase() alt=product.name width="20")
                             span.pl-2= product.name
                         .col-2
                             a(href=`/favoritos/remover-dos-favoritos/${product.id}` class="btn btn-danger btn-sm") Excluir

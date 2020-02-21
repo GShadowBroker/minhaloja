@@ -24,7 +24,7 @@ block conta
                             td
                                 .row
                                     .col-md-2
-                                        img(src=product.product.image_path, class="d-none d-md-block", alt=product.product.name width="60")
+                                        img(src=product.product.image_path.toLowerCase(), class="d-none d-md-block", alt=product.product.name width="60")
                                     .col-.col-md-10
                                         span= product.product.name
                                         p.text-muted Cód. #{product.product.id}
