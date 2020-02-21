@@ -30,7 +30,7 @@ const credentials = {
 };
 
 console.log(process.env.NODE_ENV);
-console.log(`process.env.NODE_ENV !== 'production': ${process.env.NODE_ENV === 'production'}`);
+console.log(`process.env.NODE_ENV == 'production': ${process.env.NODE_ENV == 'production'}`);
 
 if (process.env.NODE_ENV !== 'production'){
   var config = credentials.development;
