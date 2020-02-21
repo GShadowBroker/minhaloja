@@ -59,8 +59,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 if (process.env.NODE_ENV === 'production') {
 	var db = new Sequelize(process.env.DATABASE_URL);
-
-	console.log(`IT'S PRRRRRRRRRRRRRRRRRRDUCTION TIME!`);
 } else {
 	var db = new Sequelize(
 		process.env.DB_NAME,
@@ -70,7 +68,6 @@ if (process.env.NODE_ENV === 'production') {
 			dialect: 'postgres'
 		}
 	);
-	console.log(`IT'S DVVVVVVVVVVVVVVVVVVVVVVVVVVVVELPMENT TIME! :(`);
 }
 
 var sessionStore = new SequelizeStore({
