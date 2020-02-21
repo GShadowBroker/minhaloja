@@ -57,7 +57,21 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-var db = new Sequelize(process.env.DATABASE_URL);
+if (process.env.NODE_ENV === 'production') {
+	var db = new Sequelize(process.env.DATABASE_URL);
+
+	console.log(`IT'S PRRRRRRRRRRRRRRRRRRDUCTION TIME!`);
+} else {
+	var db = new Sequelize(
+		process.env.DB_NAME,
+		'postgres',
+		process.env.DB_PASSWORD, {
+			host: 'localhost',
+			dialect: 'postgres'
+		}
+	);
+	console.log(`IT'S DVVVVVVVVVVVVVVVVVVVVVVVVVVVVELPMENT TIME! :(`);
+}
 
 var sessionStore = new SequelizeStore({
 	db: db
