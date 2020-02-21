@@ -4,21 +4,30 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config/config.json')[env];
 const db = {};
 
-if (process.env.NODE_ENV !== 'production') {
-  
-  let dotenv = require('dotenv').config({path:'../.env'});
-
-  let DATABASE_URL = `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:5432/${process.env.DB_NAME}`;
-
-  var sequelize = new Sequelize(DATABASE_URL);
-
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-
-  var sequelize = new Sequelize(process.env.DATABASE_URL);
-
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+// if (process.env.NODE_ENV !== 'production') {
+  
+//   let dotenv = require('dotenv').config({path:'../.env'});
+
+//   let DATABASE_URL = `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:5432/${process.env.DB_NAME}`;
+
+//   var sequelize = new Sequelize(DATABASE_URL);
+
+// } else {
+
+//   var sequelize = new Sequelize(process.env.DATABASE_URL);
+
+// }
 
 fs
   .readdirSync(__dirname)
