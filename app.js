@@ -70,6 +70,7 @@ if (process.env.NODE_ENV === 'production') {
 			dialect: 'postgres'
 		}
 	);
+	console.log(`IT'S DVVVVVVVVVVVVVVVVVVVVVVVVVVVVELPMENT TIME! :(`);
 }
 
 var sessionStore = new SequelizeStore({

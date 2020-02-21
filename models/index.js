@@ -31,8 +31,13 @@ const credentials = {
 
 if (process.env.NODE_ENV !== 'production'){
   var config = credentials.development;
+
+  
+	console.log(`IT'S DVVVVVVVVVVVVVVVVVVVVVVVVVVVVELPMENT TIME! :(`);
 } else {
   var config = credentials.production;
+  
+	console.log(`IT'S PRRRRRRRRRRRRRRRRRRDUCTION TIME!`);
 }
 
 console.log(`WE ARE IN ${process.env.NODE_ENV} mode!\config: ${config}\nconfig.use_env_variable: ${config.use_env_variable}`);
