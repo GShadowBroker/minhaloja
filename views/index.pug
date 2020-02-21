@@ -43,7 +43,7 @@ block content
 						span.percentage-off #{product.discount}% OFF
 						img(src=product.image_path loading="lazy" class="card-img-top" alt=product.name class="img-product")
 						.card-body
-							h5.card-title= product.name
+							h5.card-title=".."+product.name
 							p.card-text Por Apenas 
 								strike.text-muted R$ #{(product.price_cents / 100).toFixed(2).replace('.',',')}
 							h4(class="text-success text-center price-tag") R$ #{(Math.round(product.price * 100) / 100).toFixed(2).toString().replace('.',',')}
