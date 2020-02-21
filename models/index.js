@@ -1,12 +1,37 @@
 'use strict';
 
+const dotenv = require('dotenv').config({path:'../.env'});
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config.json')[env];
 const db = {};
+
+console.log(`WE ARE IN ${process.env.NODE_ENV} mode!`);
+
+const credentials = {
+  "development": {
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL"
+  }
+};
+
+const config = credentials[env];
 
 let sequelize;
 if (config.use_env_variable) {
