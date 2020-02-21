@@ -57,7 +57,11 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
+	var db = new Sequelize(process.env.DATABASE_URL);
+
+	console.log(`IT'S PRRRRRRRRRRRRRRRRRRDUCTION TIME!`);
+} else {
 	var db = new Sequelize(
 		process.env.DB_NAME,
 		'postgres',
@@ -66,8 +70,6 @@ if (process.env.NODE_ENV !== 'production') {
 			dialect: 'postgres'
 		}
 	);
-} else {
-	var db = new Sequelize(process.env.DATABASE_URL);
 }
 
 var sessionStore = new SequelizeStore({
