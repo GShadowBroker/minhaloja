@@ -168,16 +168,25 @@ body {
   position: sticky;
   top: 0;
   z-index: 3;
-  background-color: #130f40;
+  background-color: rgba(19, 15, 64, 0.93);
   padding: 15px; }
   .navegacao .container .nav-section {
     display: flex;
     align-items: center;
     justify-content: center; }
     .navegacao .container .nav-section ul {
+      display: flex;
+      align-items: center;
       padding: 0;
       margin: 0;
       list-style-type: none; }
+      .navegacao .container .nav-section ul .logo-nav {
+        text-align: center;
+        font-family: "Righteous";
+        font-size: 1.4em;
+        color: #f0932b;
+        font-weight: 500;
+        text-shadow: 1px 1px 4px solid black; }
       .navegacao .container .nav-section ul li {
         display: inline; }
         .navegacao .container .nav-section ul li a {
@@ -377,11 +386,11 @@ footer {
     border: solid #95afc0; }
 
 .btn-light {
-  background-color: #dff9fb;
-  border: #dff9fb; }
+  background-color: #dfe4ea;
+  border: #dfe4ea; }
   .btn-light:hover {
-    background-color: #f2fcfd;
-    border: #f2fcfd; }
+    background-color: #f1f2f6;
+    border: #f1f2f6; }
 
 input:not(.btn), input:focus:not(.btn) {
   border: none;

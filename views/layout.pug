@@ -95,7 +95,7 @@ html(lang="pt-BR")
 						.nav-left.nav-section.d-none.d-lg-flex.col-sm-4
 							ul
 								li
-									a(href='/') HOME
+									a(href='/').logo-nav ML
 								li
 									a(href='/produtos/fabricantes/apple') Apple
 								li
@@ -160,8 +160,13 @@ html(lang="pt-BR")
 
 			.content#content
 				block content
-			footer
-				| &copy;2020 - Minha Loja
+			footer.d-flex.align-items-center.justify-content-center.flex-column
+				.row
+					span.text-center.my-1 &copy;2020 - Minha Loja
+				.row
+					span.text-center.text-muted.my-1 Esta loja é fictícia. Os produtos aqui anunciados não representam ofertas reais.
+				.row
+					a(href="mailto:gledysonferreira@gmail.com").text-center.text-muted.my-1 Glédyson Ferreira
 	
 		script(src="https://unpkg.com/axios/dist/axios.min.js")
 		script(src="https://cdn.jsdelivr.net/npm/vue@2.6.11")

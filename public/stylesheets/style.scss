@@ -229,7 +229,7 @@ body {
     position: sticky;
     top:0;
     z-index: 3;
-    background-color: #130f40;
+    background-color: rgba(19,15,64,0.93);
     padding: 15px;
     .container {
         .nav-section {
@@ -237,9 +237,21 @@ body {
             align-items: center;
             justify-content: center;
             ul {
+                display: flex;
+                align-items: center;
                 padding: 0;
                 margin: 0;
                 list-style-type: none;
+
+                .logo-nav {
+                    text-align: center;
+                    font-family: 'Righteous', ;
+                    font-size: 1.4em;
+                    color: #f0932b;
+                    font-weight: 500;
+                    text-shadow: 1px 1px 4px solid black;
+                }
+
                 li {
                     display: inline;
                     a {
@@ -529,11 +541,11 @@ footer {
     }
 }
 .btn-light {
-    background-color: #dff9fb;
-    border: #dff9fb;
+    background-color: #dfe4ea;
+    border: #dfe4ea;
     &:hover {
-        background-color: #f2fcfd;
-        border: #f2fcfd;
+        background-color: #f1f2f6;
+        border: #f1f2f6;
     }
 }
 input:not(.btn), input:focus:not(.btn) {
