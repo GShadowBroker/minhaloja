@@ -5,7 +5,7 @@ block painel
     #list-profile
         h3 Adicionar Produto:
         hr
-        form(action="minhaconta/adicionar-produto" method="post")
+        form(action="/minhaconta/adicionar-produto" method="post")
             input(type="hidden" name="_csrf" value=csrfToken)
             if alert
                 span.list-group-item.list-group-item-success.text-center= alert
