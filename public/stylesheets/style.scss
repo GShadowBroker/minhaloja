@@ -154,11 +154,41 @@ body {
 }
 
 .header {
-    background: #30336b;
-    h1 {
-        color: white;
-        font-weight: 900;
-        letter-spacing: 10px;
+    position: relative;
+    background-image: url(../images/fabian-grohs-fPx0cdZ1vuI-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+
+    min-height: 590px;
+    padding:12px;
+
+    .filter-header {
+        position: absolute;
+        top: 0;
+        bottom:0;
+        width: 100%;
+        margin-left:-12px;
+
+        background-color: rgba(13, 29, 177, 0.6);
+        border-top: 4px solid #f0932b;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .texto-jumbo {
+            min-height: 250px;
+            h1 {
+                font-weight: 800;
+            }
+        }
+    }
+
+    h2 {
+        font-family: 'Righteous', ;
+        color: #f0932b;
+        font-weight: 500;
+        text-shadow: 1px 1px 4px solid black;
     }
 
     .menu-conta {
@@ -172,18 +202,19 @@ body {
                 display: inline;
                 padding: 0px 10px 0px 10px;
                 color: white;
+                font-weight: 700;
 
                 a {
                     overflow: hidden;
                     text-decoration: none;
-                    border-top: 2px solid #30336b;
+                    border-bottom: 2px solid rgba(0,0,0,0);
                     color: #dbdbf1;
                     padding: 8px;
                     transition: all 0.3s;
 
                     &:hover {
                         text-orientation: sideways-right;
-                        border-top: 2px solid #686de0;
+                        border-bottom: 2px solid #f0932b;
                     }
                 }
             }
@@ -457,6 +488,10 @@ footer {
 
 [v-cloak] {
     display: none;
+}
+
+::selection {
+    background: #f0932b;
 }
 
 // BOOTSTRAP OVERWRITES

@@ -1,5 +1,6 @@
 extends layout
 
+block header
 block content
     .container
         .row.finalizar-form
@@ -19,7 +20,7 @@ block content
                                             img(src=product.product.image_path.toLowerCase() width="40")
                                             span  #{product.product.name}
                                         td: span.badge.badge-dark= product.qty
-                                        td= product.product.price
+                                        td= product.product.price.toFixed(2).toString().replace('.',',')
                             tfooter
                                 tr
                                     td(colspan="3") Total = R$ #{cart.totalPrice.toFixed(2).toString().replace('.',',')}

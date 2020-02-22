@@ -5,6 +5,7 @@ html(lang="pt-BR")
 		meta(charset='UTF-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1.0')
 		meta(http-equiv='X-UA-Compatible' content='ie=edge')
+		link(href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet")
 		link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
 		script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
 		script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
@@ -52,10 +53,23 @@ html(lang="pt-BR")
 					span(class="sr-only") Loading...
 			block header
 				.header.d-none.d-lg-block
+					
+					.filter-header
+						.container.texto-jumbo
+							.row
+								.col-6
+									.head-jumbo.my-4
+										h5.text-white Está à procura de um smartphone?
+										hr.border-white
+									.body-jumbo
+										h1.text-white Os melhores smartphones estão aqui
+									.button-jumbo.my-4
+										button.btn.btn-success.btn-lg Explorar
+								.col-6
 					.container
 						.row
 							.col-5.loja-title
-								h1 Minha Loja
+								h2 Minha Loja
 							.col-7.menu-conta.d-flex.justify-content-end
 								if user
 									ul.menu-conta
