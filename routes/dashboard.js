@@ -113,7 +113,7 @@ router.post('/adicionar-produto', checkAuthenticated, csrfMiddleware, checkAdmin
                     name: req.body.name,
                     image_path: `/images/produtos/${manufacturer.name}/${req.body.image_path}`.toLowerCase(),
                     discount: req.body.discount,
-                    price_cents: ((Math.round(req.body.price * 100) / 100) * 100).toFixed(2),
+                    price_cents: parseInt((Math.round(req.body.price * 100) / 100) * 100),
                     os: req.body.os,
                     color: req.body.color,
                     displaySize: req.body.displaySize,
