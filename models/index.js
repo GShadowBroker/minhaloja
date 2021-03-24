@@ -26,6 +26,7 @@ if (process.env.NODE_ENV === "production") {
     {
       host: "localhost",
       dialect: "postgres",
+      logging: console.log,
     }
   );
 }
