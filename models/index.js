@@ -27,10 +27,9 @@ const credentials = {
   production: {
     dialect: "postgres",
     use_env_variable: "DATABASE_URL",
+    ssl: true,
     dialectOptions: {
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: true,
     },
   },
 };
