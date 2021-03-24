@@ -11,7 +11,7 @@
     "launch": "SET DEBUG=minhaloja:* & npm run dev"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
