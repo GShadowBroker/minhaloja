@@ -35,6 +35,7 @@ var productsRouter = require("./routes/products");
 var cartRouter = require("./routes/shoppingcart");
 var favoritesRouter = require("./routes/favorites");
 var apiRouter = require("./routes/api");
+var db = require("./models");
 
 app.use(helmet());
 app.use(compression());
@@ -58,24 +59,6 @@ app.use(
   })
 );
 app.use(express.static(path.join(__dirname, "public")));
-
-if (process.env.NODE_ENV === "production") {
-  var db = new Sequelize(process.env.DATABASE_URL, {
-    dialectOptions: {
-      ssl: true,
-    },
-  });
-} else {
-  var db = new Sequelize(
-    process.env.DB_NAME,
-    "postgres",
-    process.env.DB_PASSWORD,
-    {
-      host: "localhost",
-      dialect: "postgres",
-    }
-  );
-}
 
 var sessionStore = new SequelizeStore({
   db: db,
