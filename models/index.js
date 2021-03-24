@@ -53,10 +53,7 @@ let sequelize = null;
 if (process.env.NODE_ENV === "production") {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialectOptions: {
-      ssl: {
-        rejectUnauthorized: false,
-      },
-      logging: false,
+      ssl: true,
     },
   });
 } else {
@@ -67,7 +64,6 @@ if (process.env.NODE_ENV === "production") {
     {
       host: "localhost",
       dialect: "postgres",
-      logging: false,
     }
   );
 }
